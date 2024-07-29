@@ -1,15 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './App.module.scss';
 import { RoutesPages } from './routes/Routes';
+import yorhaLogo from "./assets/yorha-opacity-logo.png"
+
+const LoadingDots = () => {
+  const [dots, setDots] = useState("")
+  useEffect(() => {
+    setTimeout(() => {
+      setDots(prev => {
+        if (prev.length === 3)
+          return ""
+        return prev + "."
+      })
+    }, 500)
+  }, [dots])
+  return <span>{dots}</span>
+}
+
+const LoadingScreen = () => {
+  return <section
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: `rgba(0, 0, 0, 0.85) url(${yorhaLogo}) center center no-repeat`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      color: "white"
+    }}
+  >
+    <div style={{
+      display: "flex",
+      alignItems: "baseline"
+    }}>
+      <h1>LOADING </h1>
+      <p> - CHECKING SYSTEM</p>
+      <LoadingDots />
+    </div>
+  </section >
+}
 
 function App() {
   return (
-      <div className={styles.App}>
-        {/* <NavbarModule/>
+    <div className={styles.App}>
+      {/* <NavbarModule/>
         <hr/>
-        <div className={styles.dottedspaced}/> */}
+        <div className={styles.dottedspaced}/>
         <RoutesPages/>
-      </div>
+         */}
+      <LoadingScreen />
+    </div>
   );
 }
 
