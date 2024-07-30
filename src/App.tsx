@@ -3,6 +3,14 @@ import styles from './App.module.scss';
 import { RoutesPages } from './routes/Routes';
 import yorhaLogo from "./assets/yorha-opacity-logo.png"
 
+const SpinLoadginIcon = () => <>
+  <div className={styles.spinContainer}>
+    <div className={styles.inner}></div>
+    <div className={styles.spin}></div>
+    <div className={styles.outter}></div>
+    <div className={styles.close}></div>
+  </div></>
+
 const LoadingDots = () => {
   const [dots, setDots] = useState("")
   useEffect(() => {
@@ -25,17 +33,25 @@ const LoadingScreen = () => {
       background: `rgba(0, 0, 0, 0.85) url(${yorhaLogo}) center center no-repeat`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
-      color: "white"
+      color: "white",
+      padding: "2% 4% 4% 4%"
     }}
   >
-    <div style={{
+    <header style={{
       display: "flex",
-      alignItems: "baseline"
+      justifyContent: "space-between",
+      alignItems: "center"
     }}>
-      <h1>LOADING </h1>
-      <p> - CHECKING SYSTEM</p>
-      <LoadingDots />
-    </div>
+      <div style={{
+        display: "flex",
+        alignItems: "baseline"
+      }}>
+        <h1>LOADING </h1>
+        <p> - CHECKING SYSTEM</p>
+        <LoadingDots />
+      </div>
+      <SpinLoadginIcon />
+    </header>
   </section >
 }
 
