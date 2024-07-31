@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
+/* TODO: Add props descriptions */
+
 interface TyperProps {
   receivedText: string,
   callBack: () => any
   speed?: number
 }
-
 export const Typer = ({ receivedText, callBack, speed = 10 }: TyperProps) => {
   const [typingText, setTypingText] = useState<string>("")
 
