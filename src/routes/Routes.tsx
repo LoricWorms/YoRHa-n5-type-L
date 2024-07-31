@@ -7,13 +7,14 @@ import {NavbarModule} from "../modules/NavBarModule"
 import { QuestsModule, ActiveQuestsModule } from "../modules/questsModule"
 import { IntelModule } from "../modules/intelModule"
 import { ActiveIntelModule } from "../modules/intelModule/ActiveIntelModule"
-import { Quest, Items, Weapons, Intel, Debug, Map } from "../pages"
+import { Quest, Items, Weapons, Intel, Debug, Map, Loading } from "../pages"
 
 export const RoutesPages = () => {
   return(
     <Routes>
+      <Route path={'/loading'} element={<Loading/>}/>
       <Route path={`/`} element={<NavbarModule/>}>
-        <Route path="/" element={<Navigate to="/map"/>}/>
+        <Route path="/" element={<Navigate to="/loading"/>}/>
         <Route path={'/map'} element={<Map/>}/>
         <Route path={`/quest`} element={<Quest/>}>
           <Route path={`/quest/:statusType/`} element={<QuestsModule/>}>

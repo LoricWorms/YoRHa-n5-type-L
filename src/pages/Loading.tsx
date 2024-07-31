@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { LoadingDots, LoadingLogs, SpinLoadingIcon } from "../components";
 import yorhaLogo from "./../assets/yorha-opacity-logo.png";
-
+import { useNavigate } from "react-router-dom";
 /*
 TODO: Fix fonts
 TODO: Fix padding
-TODO: Fix remove loading
+TODO: Add props descriptions
+TODO: Add route changing animation
+TODO: Add glitching animation
 */
 
 const Section = styled.section`
@@ -28,6 +30,15 @@ const Container = styled.div`
 `;
 
 export const Loading = () => {
+  const navigate = useNavigate();
+  const waitngTime = 1000;
+
+  const loadingCompleted = () => {
+    setTimeout(() => {
+      navigate("/map");
+    }, waitngTime);
+  };
+
   return (
     <Section>
       <Header>
@@ -38,7 +49,7 @@ export const Loading = () => {
         </Container>
         <SpinLoadingIcon />
       </Header>
-      <LoadingLogs removeSpeed={10000} />
+      <LoadingLogs callBack={loadingCompleted} />
     </Section>
   );
 };

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Typer } from "./Typer";
 
-/* TODO: Fix fonts */
+/*
+TODO: Fix fonts
+TODO: Add props descriptions
+*/
 
-export const LoadingLogs = ({ removeSpeed = 1000 }) => {
-  const [loadingCompleted, setLoadingCompleted] = useState(false);
+type LoadingLogsProps = { callBack: () => any };
 
+export const LoadingLogs = ({ callBack }: LoadingLogsProps) => {
   const messages: string[] = [
     "Commencing System Check",
     "Memory Unit: Green",
@@ -37,15 +40,11 @@ export const LoadingLogs = ({ removeSpeed = 1000 }) => {
   const removeComponent = () => {
     if (waitingListRender.length < messages.length) return;
 
-    setTimeout(() => {
-      setLoadingCompleted(true);
-    }, removeSpeed);
+    callBack();
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(removeComponent, [waitingListRender]);
-
-  if (loadingCompleted) return <></>;
 
   return (
     <>
