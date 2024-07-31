@@ -2,15 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './App.module.scss';
 import { RoutesPages } from './routes/Routes';
 import yorhaLogo from "./assets/yorha-opacity-logo.png"
-import { LoadingDots, Typer } from './components';
-
-const SpinLoadginIcon = () => <>
-  <div className={styles.spinContainer}>
-    <div className={styles.inner}></div>
-    <div className={styles.spin}></div>
-    <div className={styles.outter}></div>
-    <div className={styles.close}></div>
-  </div></>
+import { LoadingDots, SpinLoadingIcon, Typer } from './components';
 
 const LoadingLogs = ({ removeSpeed = 1000 }) => {
   const [loadingCompleted, setLoadingCompleted] = useState(false)
@@ -88,7 +80,7 @@ const LoadingScreen = () => {
         <p> - CHECKING SYSTEM</p>
         <LoadingDots />
       </div>
-      <SpinLoadginIcon />
+      <SpinLoadingIcon />
     </header>
     <LoadingLogs removeSpeed={10000} />
   </section >
