@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './App.module.scss';
 import { RoutesPages } from './routes/Routes';
 import yorhaLogo from "./assets/yorha-opacity-logo.png"
+import { Typer } from './components';
 
 const SpinLoadginIcon = () => <>
   <div className={styles.spinContainer}>
@@ -23,26 +24,6 @@ const LoadingDots = () => {
     }, 500)
   }, [dots])
   return <span>{dots}</span>
-}
-
-export const Typer = ({ receivedText, callBack, speed = 100 }) => {
-  const [typingText, setTypingText] = useState<string>("")
-
-  function startTyping() {
-    if (typingText.length < receivedText.length) {
-      setTimeout(() => {
-        setTypingText(prev => prev += receivedText.charAt(typingText.length));
-      }, speed);
-    }
-    else callBack()
-
-  }
-
-  useEffect(startTyping, [receivedText, typingText])
-
-  if (!receivedText) return <></>
-
-  return <p>{typingText}</p>
 }
 
 const LoadingLogs = ({ removeSpeed = 1000 }) => {
