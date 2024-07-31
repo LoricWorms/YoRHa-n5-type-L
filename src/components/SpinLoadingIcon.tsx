@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 /* TODO: Fix color */
+/* TODO: Create communs styles variables */
 
 const spinDuration = 1;
 
