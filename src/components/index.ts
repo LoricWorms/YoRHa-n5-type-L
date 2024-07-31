@@ -9,3 +9,4 @@ export { Strip } from './Strip';
 export { ScrollElement } from './ScrollElement';
 export { DropDown } from './DropDown'
 export { Typer } from './Typer'
+export { LoadingDots } from './LoadingDots'

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './App.module.scss';
 import { RoutesPages } from './routes/Routes';
 import yorhaLogo from "./assets/yorha-opacity-logo.png"
-import { Typer } from './components';
+import { LoadingDots, Typer } from './components';
 
 const SpinLoadginIcon = () => <>
   <div className={styles.spinContainer}>
@@ -11,20 +11,6 @@ const SpinLoadginIcon = () => <>
     <div className={styles.outter}></div>
     <div className={styles.close}></div>
   </div></>
-
-const LoadingDots = () => {
-  const [dots, setDots] = useState("")
-  useEffect(() => {
-    setTimeout(() => {
-      setDots(prev => {
-        if (prev.length === 3)
-          return ""
-        return prev + "."
-      })
-    }, 500)
-  }, [dots])
-  return <span>{dots}</span>
-}
 
 const LoadingLogs = ({ removeSpeed = 1000 }) => {
   const [loadingCompleted, setLoadingCompleted] = useState(false)
