@@ -2,14 +2,28 @@ import { useEffect, useState } from "react";
 import { Typer } from "./Typer";
 
 /*
-TODO: Fix fonts
-TODO: Add props descriptions
 TODO: Add messages to mockep folder
 */
 
-type LoadingLogsProps = { callBack: () => any };
+/**
+ * Props for the LoadingLogs component.
+ *
+ * @property {() => any} callBack - The callback function to be called once all messages have been rendered.
+ */
+type LoadingLogsProps = {
+  /**
+   * The callback function to be called once all messages have been typed.
+   */
+  callBack: () => any;
+};
 
-export const LoadingLogs = ({ callBack }: LoadingLogsProps) => {
+/**
+ * LoadingLogs component renders a series of messages sequentially using the Typer component.
+ *
+ * @param {LoadingLogsProps} props - The props for the component.
+ * @returns {JSX.Element} - The JSX element that represents the LoadingLogs component.
+ */
+export const LoadingLogs = ({ callBack }: LoadingLogsProps): JSX.Element => {
   const messages: string[] = [
     "Commencing System Check",
     "Memory Unit: Green",
@@ -33,14 +47,21 @@ export const LoadingLogs = ({ callBack }: LoadingLogsProps) => {
 
   const [waitingListRender, setWaitingListRender] = useState([messages[0]]);
 
+  /**
+   * Updates the list of messages to be rendered by adding the next message to the waitingListRender state.
+   *
+   * @param {number} i - The index of the current message being rendered.
+   */
   const updateRenderList = (i: number) => {
     if (!messages[i + 1]) return;
     setWaitingListRender((prev) => [...prev, messages[i + 1]]);
   };
 
+  /**
+   * Calls the callBack function once all messages have been rendered.
+   */
   const removeComponent = () => {
     if (waitingListRender.length < messages.length) return;
-
     callBack();
   };
 
