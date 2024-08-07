@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { Typer } from "./Typer";
-
-/*
-TODO: Add messages to mockep folder
-*/
+import messages from "../utils/mockData/loadingMessages";
 
 /**
  * Props for the LoadingLogs component.
@@ -24,27 +21,6 @@ type LoadingLogsProps = {
  * @returns {JSX.Element} - The JSX element that represents the LoadingLogs component.
  */
 export const LoadingLogs = ({ callBack }: LoadingLogsProps): JSX.Element => {
-  const messages: string[] = [
-    "Commencing System Check",
-    "Memory Unit: Green",
-    "Initializing Tactics Log",
-    "Loading Geographic Data",
-    "Vitals: Green",
-    "Remaining MP: 100%",
-    "Black Box Temperature: Normal",
-    "Black Box Internal Pressure: Normal",
-    "Activating IFF",
-    "Activating FCS",
-    "Initializing Pod Connection",
-    "Launching DBU Setup",
-    "Activating Inertia Control System",
-    "Activating Environmental Sensors",
-    "Equipment Authentication: Complete",
-    "Equipment Status: Green",
-    "All Systems Green",
-    "Combat Preparations Complete",
-  ];
-
   const [waitingListRender, setWaitingListRender] = useState([messages[0]]);
 
   /**
