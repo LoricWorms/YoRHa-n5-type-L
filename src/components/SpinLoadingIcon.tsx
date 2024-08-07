@@ -20,6 +20,11 @@ const SpinContainer = styled.div`
   height: 40px;
   position: relative;
   animation: ${rotating} ${spinDuration}s linear infinite;
+  @media (max-width: 400px) {
+    position: fixed;
+    bottom: 4%;
+    right: 4%;
+  }
 `;
 const Inner = styled.div`
   width: 35%;
