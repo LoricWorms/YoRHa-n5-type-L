@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
 
-/* TODO: Fix font */
-
 export const LoadingDots = () => {
   const [dots, setDots] = useState("")
   useEffect(() => {

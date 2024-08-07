@@ -1,7 +1,9 @@
-import styled, { keyframes } from "styled-components";
+import styled, {
+  css,
+  keyframes,
+} from "styled-components";
 
 /* TODO: Fix color */
-/* TODO: Create communs styles variables */
 
 const spinDuration = 1;
 
@@ -13,6 +15,20 @@ const rotating = keyframes`
   to {
     -webkit-transform: rotate(360deg);
   }
+`;
+
+const defaultPositionCssValues = css`
+  border-radius: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const defaultCssValues = css`
+  width: 80%;
+  height: 80%;
+  ${defaultPositionCssValues}
 `;
 
 const SpinContainer = styled.div`
@@ -37,13 +53,7 @@ const Inner = styled.div`
   transform: translate(-50%, -50%);
 `;
 const Spin = styled.div`
-  width: 80%;
-  height: 80%;
-  border-radius: 60%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${defaultCssValues}
   border: 3px solid black;
   z-index: 1;
   border-top-color: transparent;
@@ -51,23 +61,13 @@ const Spin = styled.div`
   border-left-color: transparent;
 `;
 const Outter = styled.div`
-  width: 80%;
-  height: 80%;
-  border-radius: 60%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${defaultCssValues}
   border: 6px solid white;
 `;
 const Close = styled.div`
   width: 100%;
   height: 100%;
-  border-radius: 60%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${defaultPositionCssValues}
   border: 2px solid white;
 `;
 
