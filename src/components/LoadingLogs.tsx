@@ -4,6 +4,7 @@ import { Typer } from "./Typer";
 /*
 TODO: Fix fonts
 TODO: Add props descriptions
+TODO: Add messages to mockep folder
 */
 
 type LoadingLogsProps = { callBack: () => any };

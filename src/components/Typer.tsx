@@ -24,5 +24,5 @@ export const Typer = ({ receivedText, callBack, speed = 10 }: TyperProps) => {
 
   if (!receivedText) return <></>
 
-  return <p>{typingText}</p>
+  return <p className="asdqwe">{typingText}</p>
 }

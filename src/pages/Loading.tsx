@@ -3,21 +3,25 @@ import { LoadingDots, LoadingLogs, SpinLoadingIcon } from "../components";
 import yorhaLogo from "./../assets/yorha-opacity-logo.png";
 import { useNavigate } from "react-router-dom";
 /*
-TODO: Fix fonts
-TODO: Fix padding
 TODO: Add props descriptions
 TODO: Add route changing animation
 TODO: Add glitching animation
+TODO: centralize media mobile width value
 */
 
-const Section = styled.section`
+const Main = styled.main`
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85) url(${yorhaLogo}) center center no-repeat;
   background-repeat: no-repeat;
   background-position: center;
   color: white;
+  text-shadow: 0px 0px 5px white;
+  line-height: 2.1vh;
   padding: 2% 4% 4% 4%;
+  @media (max-width: 400px) {
+    background-size: contain;
+  }
 `;
 const Header = styled.header`
   display: flex;
@@ -40,16 +44,18 @@ export const Loading = () => {
   };
 
   return (
-    <Section>
+    <Main>
       <Header>
         <Container style={{}}>
           <h1>LOADING </h1>
-          <p> - CHECKING SYSTEM</p>
+          <p style={{ marginLeft: "4px" }}> - CHECKING SYSTEM</p>
           <LoadingDots />
         </Container>
         <SpinLoadingIcon />
       </Header>
-      <LoadingLogs callBack={loadingCompleted} />
-    </Section>
+      <section style={{ marginLeft: "2%" }}>
+        <LoadingLogs callBack={loadingCompleted} />
+      </section>
+    </Main>
   );
 };
