@@ -1,9 +1,4 @@
-import styled, {
-  css,
-  keyframes,
-} from "styled-components";
-
-/* TODO: Fix color */
+import styled, { css, keyframes } from "styled-components";
 
 const spinDuration = 1;
 
@@ -23,7 +18,7 @@ const defaultPositionCssValues = css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`;
+  `;
 
 const defaultCssValues = css`
   width: 80%;

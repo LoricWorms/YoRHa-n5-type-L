@@ -35,10 +35,12 @@ const Container = styled.div`
 
 const GlitchingH1 = styled.h1`
   ${StyledGlitchText}
-`;
-
-const GlitchingP = styled.p`
+  opacity: 0.9;
+  `;
+  
+  const GlitchingP = styled.p`
   ${StyledGlitchText}
+  opacity: 0.8;
 `;
 
 export const Loading = () => {
