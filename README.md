@@ -50,4 +50,7 @@ To do
 # to do : 
 - font size on atom level component
 - Animations Transitions
-- loading splash screen
+
+# Thanks to
+- [MrBunnyGif](https://github.com/MrBunnyGif) for the contributions on loading splash screen
+
