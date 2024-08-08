@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { StyledGlitchText } from "../styles/glitchingTextStyle";
 
 /**
  * Props for the Typer component.
@@ -21,26 +23,43 @@ interface TyperProps {
 }
 
 /**
+ * Keyframes for the glitch animation with reduced movement.
+ */
+
+const GlitchingP = styled.p`
+  ${StyledGlitchText}
+`;
+
+/**
  * Typer component types out the received text character by character at a given speed.
  *
  * @param {TyperProps} props - The props for the component.
  * @returns {JSX.Element} - The JSX element that represents the Typer component.
  */
-export const Typer = ({ receivedText, callBack, speed = 10 }: TyperProps): JSX.Element => {
-  const [typingText, setTypingText] = useState<string>("");
+export const Typer = ({
+  receivedText,
+  callBack,
+  speed = 10,
+}: TyperProps): JSX.Element => {
+  const [typingText, setTypingText] = useState<string[]>([""]);
 
-  /**
-   * Function to start the typing effect. It updates the typingText state by adding one character
-   * at a time from receivedText until the entire text is typed out, then calls the callBack function.
-   */
   function startTyping() {
-    if (typingText.length < receivedText.length) {
+    if (typingText.join("").length < receivedText.length) {
       setTimeout(() => {
-        setTypingText(
-          (prev) => (prev += receivedText.charAt(typingText.length))
-        );
+        const nextChar = receivedText.charAt(typingText.join("").length);
+        setTypingText((prev) => {
+          const newText = [...prev];
+          if (nextChar === "\n") {
+            newText.push("");
+          } else {
+            newText[newText.length - 1] += nextChar;
+          }
+          return newText;
+        });
       }, speed);
-    } else callBack();
+    } else {
+      callBack();
+    }
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,5 +67,13 @@ export const Typer = ({ receivedText, callBack, speed = 10 }: TyperProps): JSX.E
 
   if (!receivedText) return <></>;
 
-  return <p>{typingText}</p>;
+  return (
+    <div>
+      {typingText.map((line, index) => (
+        <GlitchingP key={index} data-text={line}>
+          {line}
+        </GlitchingP>
+      ))}
+    </div>
+  );
 };
