@@ -1,10 +1,14 @@
-export {Button} from './Button';
-export {Bar} from './Bar';
-export {Widget} from './Widget';
-export {Title} from './Title';
-export {Footer} from './Footer' 
-export {YorhaNavLink} from './YorhaNavLink';
-export {Tab} from './Tab';
-export {Strip} from './Strip';
-export {ScrollElement} from './ScrollElement';
-export {DropDown} from './DropDown'
+export { Button } from './Button';
+export { Bar } from './Bar';
+export { Widget } from './Widget';
+export { Title } from './Title';
+export { Footer } from './Footer'
+export { YorhaNavLink } from './YorhaNavLink';
+export { Tab } from './Tab';
+export { Strip } from './Strip';
+export { ScrollElement } from './ScrollElement';
+export { DropDown } from './DropDown'
+export { Typer } from './Typer'
+export { LoadingDots } from './LoadingDots'
+export { SpinLoadingIcon } from './SpinLoadingIcon'
+export { LoadingLogs } from './LoadingLogs'
