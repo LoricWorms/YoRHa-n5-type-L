@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
+import { mobileMaxWidth } from "../utils/mediaQueriesValues";
 
 // Duration of the spinning animation in seconds
 const spinDuration = 1;
@@ -40,7 +41,7 @@ const SpinContainer = styled.div`
   position: relative;
   animation: ${rotating} ${spinDuration}s linear infinite;
 
-  @media (max-width: 400px) {
+  @media (max-width: ${mobileMaxWidth}px) {
     position: fixed;
     bottom: 4%;
     right: 4%;
