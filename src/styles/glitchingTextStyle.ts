@@ -109,7 +109,7 @@ export const StyledGlitchText = css`
     top: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: #1e1e1a;
     overflow: hidden;
     clip: rect(0, 900px, 0, 0);
   }

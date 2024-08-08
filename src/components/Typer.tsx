@@ -29,6 +29,7 @@ interface TyperProps {
 const GlitchingP = styled.p`
   ${StyledGlitchText}
   opacity: 0.8;
+  margin: 0;
 `;
 
 /**

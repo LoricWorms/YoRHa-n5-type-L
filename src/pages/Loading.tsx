@@ -3,9 +3,9 @@ import { LoadingDots, LoadingLogs, SpinLoadingIcon } from "../components";
 import yorhaLogo from "./../assets/yorha-opacity-logo.png";
 import { useNavigate } from "react-router-dom";
 import { StyledGlitchText } from "../styles/glitchingTextStyle";
+import { mobileMaxWidth } from "../utils/mediaQueriesValues";
 /*
 TODO: Add route changing animation
-TODO: centralize media mobile width value
 */
 
 const Main = styled.main`
@@ -16,9 +16,11 @@ const Main = styled.main`
   background-position: center;
   color: white;
   text-shadow: 0px 0px 5px white;
-  line-height: 0.5vh;
   padding: 2% 4% 4% 4%;
-  @media (max-width: 400px) {
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: ${mobileMaxWidth}px) {
     background-size: contain;
   }
 `;
@@ -35,21 +37,28 @@ const Container = styled.div`
 const GlitchingH1 = styled.h1`
   ${StyledGlitchText}
   opacity: 0.9;
-  `;
-  
-  const GlitchingP = styled.p`
+`;
+
+const GlitchingP = styled.p`
   ${StyledGlitchText}
   opacity: 0.8;
 `;
 
+const Section = styled.section`
+  margin-left: 2%;
+  height: 100%;
+  position: relative;
+  line-height: 4vh;
+`;
+
 export const Loading = () => {
   const navigate = useNavigate();
-  const waitngTime = 1000;
+  const waitingTime = 1000;
 
   const loadingCompleted = () => {
     setTimeout(() => {
       navigate("/map");
-    }, waitngTime);
+    }, waitingTime);
   };
 
   return (
@@ -65,9 +74,9 @@ export const Loading = () => {
         </Container>
         <SpinLoadingIcon />
       </Header>
-      <section style={{ marginLeft: "2%" }}>
+      <Section>
         <LoadingLogs callBack={loadingCompleted} />
-      </section>
+      </Section>
     </Main>
   );
 };
