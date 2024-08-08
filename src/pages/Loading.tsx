@@ -4,7 +4,6 @@ import yorhaLogo from "./../assets/yorha-opacity-logo.png";
 import { useNavigate } from "react-router-dom";
 import { StyledGlitchText } from "../styles/glitchingTextStyle";
 /*
-TODO: Add props descriptions
 TODO: Add route changing animation
 TODO: centralize media mobile width value
 */
