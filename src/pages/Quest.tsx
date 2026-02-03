@@ -8,17 +8,17 @@ import StatusModule from "../modules/statusModule";
 
 let QuestList = [
   {
-    Link:"/quest/Active/Quest5?status=",
+    Link:"/quest/active/default",
     Text:"Active Quests",
     type:"active",
   },
   {
-    Link:"/quest/all/Quest1?status=",
+    Link:"/quest/all/default",
     Text:"All Quests",
     type:"",
   },
   {
-    Link:"/quest/cleared/Quest1?status=",
+    Link:"/quest/cleared/default",
     Text:"Cleared Quests",
     type:"cleared",
   },

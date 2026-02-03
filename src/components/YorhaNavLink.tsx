@@ -30,7 +30,7 @@ export const YorhaCustomLink = ({className,text, filter, filterType, to, disable
     <div className={className}>
       <Button disabled={disabled} {...props}>
         <NavLink className={['mainClass', isActive ? "active" : "inactive"].join(' ')} 
-          to={`${to}` + filter}>
+          to={filter && filterType ? `${to}?${filterType}=${filter}` : `${to}`}>
           <div className='wrapper'>
           <Icon/> {text}
           </div>
