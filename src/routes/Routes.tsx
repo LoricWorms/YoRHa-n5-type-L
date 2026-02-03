@@ -27,10 +27,8 @@ export const RoutesPages = () => {
           </Route>
         </Route>
         <Route path={`/weapons`} element={<Weapons/>}>
-          <Route path={`/weapons/:list`} element={<WeaponsModule/>}>
-            <Route path={`:type`} element={<WeaponsListModule/>}>
-              <Route path={`:weaponid`} element={<ActiveWeaponsModule/>}/>
-            </Route>
+          <Route path={`:category`} element={<WeaponsListModule/>}>
+            <Route path={`:techid`} element={<ActiveWeaponsModule/>}/>
           </Route>
         </Route>
         <Route path={'/intel'} element ={<Intel/>}>

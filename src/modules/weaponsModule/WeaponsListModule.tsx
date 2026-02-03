@@ -1,26 +1,24 @@
-import { YorhaNavLink } from "@kaineee/nier-automata-ui-library";
 import React from "react";
-import { Outlet, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { Tab, Widget } from "../../components";
-import { getWeaponsArchive} from "../../utils/mockData/WeaponsMockData";
-import styles from "./WeaponsModule.module.scss";
-//todo broken navlink on certain url
+import { getTechEntriesByCategory, getTechStackCategories } from "../../utils/mockData/TechStackData";
+import styles from "./WeaponsModule.module.scss"; // Assuming styles are still relevant
+import { YorhaNavLink } from "../../components"; // Added missing import
+
 export const WeaponsListModule = () => {
+  const params = useParams(); // Using params to get category
+  const currentCategory = params.category; // This is the category id (e.g., "frontend")
 
-  const param = useParams();
-  let [searchParams] = useSearchParams();
-  let type = (searchParams.get("type"));
-
-  let location = useLocation();
-  let weaponsData = getWeaponsArchive();
+  const technologies = currentCategory ? getTechEntriesByCategory(currentCategory) : [];
 
   const TitleChecker = () => {
-    if(!type){
-      return "All Weapons"
-    }else
-      return param.type
-  }
-  console.log(type);
+    if (!currentCategory) {
+      return "Select a Category";
+    }
+    const categoryObject = getTechStackCategories().find(cat => cat.category === currentCategory);
+    return categoryObject ? categoryObject.name : "Unknown Category"; // Display full category name
+  };
+
   return(
     <div className={styles.WeaponsListContainer}>
       <Widget title={TitleChecker()}
@@ -29,16 +27,13 @@ export const WeaponsListModule = () => {
             <Tab
               content={
                 <div className={styles.weaponList}>
-                  {weaponsData
-                    .filter((weaponsData)=>{
-                      let filter = searchParams.get("type");
-                      if (!filter) return true;
-                      let name = weaponsData.typeName.toLowerCase();
-                      return name.startsWith(filter);
-                    })
-                    .map((item) => (
-                      <YorhaNavLink key={item.id} variant="transparent" to={`/weapons/type/${item.typeName}/${item.id}` + location.search} text={item.name} />
-                    ))}
+                  {technologies.length > 0 ? (
+                    technologies.map((item) => (
+                      <YorhaNavLink key={item.id} variant="transparent" to={item.id.toString()} text={item.name} /> // Link to /weapons/:category/:techid
+                    ))
+                  ) : (
+                    <p>No technologies found for this category.</p>
+                  )}
                 </div>
               }
             />

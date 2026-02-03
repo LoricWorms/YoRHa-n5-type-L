@@ -3,30 +3,32 @@ import React from "react";
 import { Outlet, useParams } from "react-router-dom";
 import PagesChildTemplate from "../templates/pagesChildTemplate";
 import PagesTemplate from "../templates/pagesTemplate";
+import { getTechStackCategories } from "../utils/mockData/TechStackData"; // New import
 
 export const Weapons = () => {
-  const param = useParams();
+  const param = useParams(); // Keep useParams if needed for other parts of the page or future expansion
 
-  const TypeChecker = () => {
-    if(!param.list){
-      return ""
-    }else
-      return "- Weapons"
-  }
-  // console.log(param.list)
+  // Fetch tech stack categories
+  const techCategories = getTechStackCategories();
+
   return(
     <PagesTemplate
-      title="WEAPONS"
-      subtitle={TypeChecker()}
+      title="ARSENAL" // Updated title
+      subtitle="- Tech Stack" // Static subtitle
       child={
         <PagesChildTemplate
           lessRightSpace={true}
           extraMidSpace={true}
           LeftContent={
             <>
-              <YorhaNavLink variant="button" to={"type"} text="Weapons"/>
-              <YorhaNavLink disabled={true} text="Weapons Set 1"/>
-              <YorhaNavLink disabled={true} text="Weapons Set 2"/>
+              {techCategories.map((category) => (
+                <YorhaNavLink
+                  variant="button"
+                  key={category.category}
+                  to={`/weapons/${category.category}`} // Link to /weapons/:category
+                  text={category.name} // Display category name
+                />
+              ))}
             </>
           }
           MiddleContent={
@@ -37,7 +39,7 @@ export const Weapons = () => {
           }
         />
       }
-      footer="View all of the weapons in your possession."
+      footer="View your complete arsenal of technical skills." // Updated footer
     />
   )
 }
