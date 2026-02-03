@@ -1,61 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Tab, Widget } from "../../components";
-import {getArchivesMockID, getNestedArchivesMockID} from "../../utils/mockData/archivesMockData";
-import { Archives, Fishing, Novel, PictureBooks, Tutorials, Unit, WeaponStories } from "./shards";
+import { ScrollElement, Tab, Widget } from "../../components";
+import { getPortfolioIntelEntry } from "../../utils/mockData/portfolioIntelData"; // Updated import
 import styles from './IntelModule.module.scss'
 
 export const ActiveIntelModule = () => {
-
   const params = useParams();
-  const paramType = params.type
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  let intellistId = getArchivesMockID(paramType, parseInt(params.intelid));
-  let secondId = getNestedArchivesMockID( paramType, parseInt(params.intelid))
-
-  const data = intellistId || secondId
-
-  // console.log(data)
-
-  const ArchivesTypeCheck = () => {
-    const typeMap = {
-        archives: 1 ? (
-            <Archives/>
-            ) : "weird it seems the data is empty",
-        unitdata: <Unit/>,
-        tutorials: <Tutorials/>,
-        weaponstories: <WeaponStories/>,
-        picturebooks: <PictureBooks/>,
-        fishingencyclopedia: <Fishing/>,
-        novel: <Novel/>
-    }
-    const output = typeMap[paramType] || <>archives yet to be handled</>
-
-    return output;
-  }
-
-  const handleModal = () => {
-    return console.log("hello")
-  }
-
-  const ImageCheck = () => {
-    if(data.image){
-      if(Array.isArray(data.image)){
-        return <>an array of images</> 
-      }else {
-        return ( 
-          <div className={styles.ActiveIntelContent}>
-            <div className={styles.imageParent}>
-              <div onClick={handleModal} className={styles.image}> <img src={data.image.unit} alt="text" /> 
-              </div>
-            </div>
-            <div className={styles.content}>{ArchivesTypeCheck()}</div>
-            </div>
-        )
+  useEffect(() => {
+    const fetchIntelEntry = async () => {
+      setLoading(true);
+      // Ensure intelid is a number and paramType is available
+      if (params.intelid && params.type) {
+        const fetchedEntry = await getPortfolioIntelEntry(params.type, parseInt(params.intelid));
+        setData(fetchedEntry);
+      } else {
+        setData(null); // Clear data if no valid params
       }
-      }else{
-      return <>{ArchivesTypeCheck()}</>
-    }
+      setLoading(false);
+    };
+
+    fetchIntelEntry();
+  }, [params.intelid, params.type]); // Depend on intelid and type params
+
+  if (loading) {
+    return <p>Scanning for Intel data...</p>;
+  }
+
+  if (!data) {
+    return <p>Intel entry not found.</p>;
   }
 
   return(
@@ -64,9 +39,25 @@ export const ActiveIntelModule = () => {
       title={data.title}
       content={
         <Tab content={
-            <>
-            {ImageCheck()}
-            </>
+            <div className={styles.ActiveIntelContent}>
+              {data.image && ( // Basic image handling
+                <div className={styles.imageParent}>
+                  <div className={styles.image}>
+                    <img src={data.image} alt={data.title} />
+                  </div>
+                </div>
+              )}
+              <ScrollElement
+                content={
+                  <div className={styles.content}>
+                    {data.content.map((item, index) => (
+                      <p key={index}>{item}</p>
+                    ))}
+                    {data.descriptions && <p>{data.descriptions}</p>} {/* Render descriptions if available */}
+                  </div>
+                }
+              />
+            </div>
         }/>
       }
     />

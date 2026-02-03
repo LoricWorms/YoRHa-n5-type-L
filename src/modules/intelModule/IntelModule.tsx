@@ -1,49 +1,44 @@
 import React from "react";
-import {Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom"; // Changed import
 import { Bar, DropDown, Tab, YorhaNavLink } from "../../components";
-import { getArchivesMockData } from "../../utils/mockData/archivesMockData";
+import { getPortfolioIntelData } from "../../utils/mockData/portfolioIntelData";
 import styles from './IntelModule.module.scss'
 
 export const IntelModule = () => {
 
-  let [searchParams] = useSearchParams();
-  let location = useLocation();
+  let params = useParams(); // Changed to useParams
 
-  let intellist = getArchivesMockData();
+  let intellist = getPortfolioIntelData();
 
-  const first = intellist.filter((intellist)=>{
-    let filter = searchParams.get("type")
-    if(!filter) return true;
-    let type = intellist.IntelType;
-    return type.startsWith(filter);
-    }).map((item)=>
-    item.data.map((test)=>{
-      return(<YorhaNavLink variant="transparent" to={test.id + location.search} text={test.title} key={test.id}/>)
-  }))
+  // Filter based on IntelType from URL parameter
+  const filteredCategory = intellist.filter((category) => {
+    let filter = params.type; // Get type from useParams
+    if (!filter) return false; // Don't show anything if no type
+    return category.IntelType === filter;
+  });
+
+  const currentCategory = filteredCategory.length > 0 ? filteredCategory[0] : null;
+
+  // Map direct data entries
+  const first = currentCategory ? currentCategory.data.map((item) => (
+    <YorhaNavLink variant="transparent" to={item.id.toString()} text={item.title} key={item.id}/>
+  )) : [];
   
-  const second = intellist.filter((intellist)=>{
-    let filter = searchParams.get("type")
-    if(!filter) return true;
-    let type = intellist.IntelType;
-    return type.startsWith(filter);
-    }).map((item)=>item.nestedData.map((evenmore)=>{
-    return(
-      <DropDown 
-        key={evenmore.id}
-        Title={evenmore.title} 
-        Content={
-          evenmore.dropDownData.map((yeah)=>{
-            return(
-              <div key={Math.random()} className={styles.dropdownChild}><YorhaNavLink variant="transparent" to={yeah.id + location.search} text={yeah.title}/></div>
-            )
-          })
-        }
-      />
-    )
-  }))
+  // Map nested data entries
+  const second = currentCategory ? currentCategory.nestedData.map((evenmore) => (
+    <DropDown 
+      key={evenmore.id}
+      Title={evenmore.title} 
+      Content={
+        evenmore.dropDownData.map((yeah) => (
+          <div key={yeah.id} className={styles.dropdownChild}><YorhaNavLink variant="transparent" to={yeah.id.toString()} text={yeah.title}/></div>
+        ))
+      }
+    />
+  )) : [];
 
-  const third = second[0].concat(first[0]);
-  // console.log(intellist)
+  const third = first.concat(second);
+
   return (
     <div className={styles.IntelModule}>
       <div className={styles.IntelModuleContainer}>
@@ -53,7 +48,7 @@ export const IntelModule = () => {
         <Tab
           className={styles.TabContent}
           content={
-            third
+            third.length > 0 ? third : <p>Select a category.</p>
           }
         />
       </div>
