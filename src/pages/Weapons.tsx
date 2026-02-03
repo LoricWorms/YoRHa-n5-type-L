@@ -3,18 +3,34 @@ import React from "react";
 import { Outlet, useParams } from "react-router-dom";
 import PagesChildTemplate from "../templates/pagesChildTemplate";
 import PagesTemplate from "../templates/pagesTemplate";
-import { getTechStackCategories } from "../utils/mockData/TechStackData"; // New import
+import { getTechStackCategories } from "../utils/mockData/TechStackData";
+import { SubTitle } from "../utils/ParamAsSubTitle"; // Import SubTitle
 
 export const Weapons = () => {
-  const param = useParams(); // Keep useParams if needed for other parts of the page or future expansion
+  const param = useParams();
 
   // Fetch tech stack categories
   const techCategories = getTechStackCategories();
 
-  return(
+  // Function to determine the subtitle type
+  const TypeCheckWeapons = () => {
+    // If a category param exists, return it, otherwise return undefined
+    return param.category;
+  };
+
+  // Function to determine the footer text
+  const ParamCheckWeapons = () => {
+    if (param.category) {
+      return `current technologies related to ${param.category}`;
+    } else {
+      return "your complete arsenal of technical skills";
+    }
+  };
+
+  return (
     <PagesTemplate
-      title="ARSENAL" // Updated title
-      subtitle="- Tech Stack" // Static subtitle
+      title="ARSENAL"
+      subtitle={SubTitle(TypeCheckWeapons(), "Tech Stack")} // Dynamic subtitle
       child={
         <PagesChildTemplate
           lessRightSpace={true}
@@ -25,21 +41,21 @@ export const Weapons = () => {
                 <YorhaNavLink
                   variant="button"
                   key={category.category}
-                  to={`/weapons/${category.category}`} // Link to /weapons/:category
-                  text={category.name} // Display category name
+                  to={`/weapons/${category.category}`}
+                  text={category.name}
                 />
               ))}
             </>
           }
           MiddleContent={
-            <Outlet/>
+            <Outlet />
           }
           RightContent={
             <></>
           }
         />
       }
-      footer="View your complete arsenal of technical skills." // Updated footer
+      footer={`View ${ParamCheckWeapons()}.`} // Dynamic footer
     />
-  )
-}
+  );
+};
