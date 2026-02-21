@@ -1,56 +1,62 @@
-# Nier Automata Design System (WIP)
+# NieR:Automata Portfolio - YORHA UNIT [DEVELO-TYPE]
 
-a Wiki site with in-game native User Interface Design. and React component UI libary based on Nier Automata User Interface.
+A high-fidelity personal portfolio inspired by the **NieR:Automata** user interface. This project transforms the iconic "YoRha" aesthetic into a functional, interactive web experience to showcase skills, experience, and academic history.
 
-# Table of Contents
-- [General Information](#general-information)
-- [Links](#links)
-- [Components](#components)
-- [Variants and Props Explanation](#variants-and-props-explanations)
-- [Stacks](#stacks)
-- [To do](#to-do)
+## 🔗 Live Demo
+*(Insert your deployment link here, e.g., Netlify or Vercel)*
 
-# General Information
-Yorha Archive - website to see all about in game resources and informations such as quest, weapons, items, novel, etc, that you would normally see in wiki, but with the native game user interface design. 
-giving the feelings as if yo are viewing them from the game itself.
-<br><br>
-Ui Library - React component library based on Nier Automata User Interface, translating them from in game into web components.
-<br> <br> There are also several others project im developing in this repository such as the mini game, and some basic chat app with Yorha Signature Interface in this project.
+## 🎮 Concept
+This portfolio is an adaptation of the NieR:Automata in-game menu system, specifically designed for **Loric Worms (YORHA UNIT [DEVELO-TYPE])**. It utilizes the "Intel" archive to present professional and personal data in an immersive environment.
 
-# Links
-### [YoRha Archive Website](https://yorha-archive.netlify.app/) - Informations, journal, and codex from Nier Automata with its signature settings design i built in this project.
+### Integrated Modules:
+- **Intel Archive**: The primary portfolio section featuring:
+  - **Profile [UNIT DATA]**: Core identity and mission objectives.
+  - **Skills [LOGIC CORES]**: Backend (Java, PHP, Python), Frontend (React, Vue), and Database proficiency.
+  - **Experience [FIELD OPERATIONS]**: History of deployments at WIKLOG, Ludwig Informatique, and Groupe Open.
+  - **Education [ACADEMIC ARCHIVE]**: Record of training at EPSI Nantes and La Joliverie.
+  - **Contact [COMMS TERMINAL]**: Direct transmission protocols for collaboration.
+- **UI Library**: A collection of React components replicating the game's interface (Buttons, Widgets, Bars, and Glitch effects).
 
-### [UI Library](https://nier-ui-storybook.netlify.app/) - React components library i built and use for this project, you can try it by downloading it from npm or see it on Storybook.
-### [Project Repository](https://github.com/Kndgy/NieR-Automata-Design-System)
+## 🛠️ Technical Specifications
+- **Framework**: React with TypeScript
+- **Styling**: Sass (SCSS) and Styled Components for dynamic UI elements.
+- **Animations**: Framer and custom CSS transitions.
+- **Effects**: React Shuffle Text for the signature glitchy terminal appearance.
+- **Build Tools**: Webpack, Rollup, and Storybook for component isolation.
 
-# Components
-Components | Variants | Props | Default
---- | --- | --- | --- |
-Title | - | title = string <br> subtitle = string | -
-Bar | Light, Dark | dark = boolean | light |
-Button | Button, Checkbox | variant = button / checkbox<br>text = string <br>disabled = boolean | button |
-Footer | - | Text = string | - |
-ScrollElement | - | Content = ReactNode | - |
-ScrollElement Tab | - | Content = ReactNode | - |
-Strip | - | - | - |
-Widget | Light, Dark | Dark = boolean <br> title = string <br> content = ReactNode <br> icon (wip) <br> lvl = string / number | Light |
-Yorha NavLink | button <br> nav <br> transparent <br> neutral | text = string <br> to = string <br> filter = string <br>className = string <br> disabled = boolean <br> filterType = string <br> variant = button / nav / transparent / netural| nav |
-DropDown | - | title = string <br> content = react.node | - 
+## 📜 Credits & Acknowledgments
+This project is built upon the foundational work of the **NieR Automata Design System**.
 
-# Variants and Props Explanations
-To do
+- **Original Creator**: [Kndgy](https://github.com/Kndgy) - Architect of the core UI library and the NieR:Automata design system foundations.
+- **Contributor**: [MrBunnyGif](https://github.com/MrBunnyGif) - Visual assets and loading splash screen contributions.
 
-# Stacks
-- React with TypeScript 
-- Styled Components (UI Library is dependant on it)
-- Storybook with webpack
-- Sass
-- Rollup
+Original Repository: [NieR-Automata-Design-System](https://github.com/Kndgy/NieR-Automata-Design-System)
 
-# to do : 
-- font size on atom level component
-- Animations Transitions
+## 🚀 Deployment & Installation
 
-# Thanks to
-- [MrBunnyGif](https://github.com/MrBunnyGif) for the contributions on loading splash screen
+### Prerequisites
+- Node.js (v16.x or higher)
+- npm or yarn
 
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/NieR-Automata-Portfolio.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+3. Launch the terminal:
+   ```bash
+   npm start
+   ```
+
+### Production Build
+To generate the optimized operational assets:
+```bash
+npm run build
+```
+
+---
+*Glory to Mankind.*
