@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useParams, useSearchParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { YorhaNavLink } from "../components";
 import StatusModule from "../modules/statusModule";
 import PagesChildTemplate from "../templates/pagesChildTemplate";
