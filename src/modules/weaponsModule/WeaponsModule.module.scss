@@ -37,35 +37,53 @@
   z-index: 10;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  
   .WeaponContainer{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 100%;
     height: 100%;
-    padding: 1.5rem;
-    gap: 14px;
+    overflow: hidden;
+
+    .scrollContent {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 1rem;
+    }
+
     .image{
       width: 100%;
-      height: 55%;
-      background-color: #b4af9a;
+      height: 200px;
+      flex-shrink: 0;
+      background-color: #57544a;
       text-align: center;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
     }
     .descriptionContainer{
       width:100%;
-      height: 50%;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      .skill{
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+      gap: 12px;
+      .years {
+        font-weight: 500;
+        color: #57544a;
+      }
+      .descriptionText {
+        opacity: 0.8;
+        line-height: 1.6;
+        p {
+          margin-bottom: 10px;
+        }
       }
     }
   }
-  }
+}

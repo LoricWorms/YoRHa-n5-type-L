@@ -35,30 +35,52 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-  justify-content: space-between;
-  .image{
+  overflow: hidden;
+
+  .scrollContent {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .image, .imagePlaceholder{
     width: 100%;
-    height: 55%;
-    background-color: #b4af9a;
+    height: 180px;
+    flex-shrink: 0;
+    background-color: #57544a;
+    color: #b4af9a;
     text-align: center;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
   }
+
   .content{
-    margin-top: -8px;
     width: 100%;
-    height: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 1rem;
+    .desc {
+      opacity: 0.8;
+      line-height: 1.6;
+      p {
+        margin-bottom: 8px;
+      }
+    }
   }
   .quantity{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;    
+    justify-content: flex-end;
+    font-weight: 500;
+    color: #57544a;
   }
 }

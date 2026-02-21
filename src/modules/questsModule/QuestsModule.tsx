@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Bar } from "@kaineee/nier-automata-ui-library";
 import {Outlet,
   useLocation,
   useSearchParams 
 } from "react-router-dom";
-import { Tab, YorhaNavLink } from "../../components";
+import { Tab, YorhaNavLink, Bar } from "../../components";
 import { getProjectsAsQuests } from "../../utils/githubApi"; // Changed import
 import styles from './QuestModule.module.scss';
 

@@ -8,38 +8,38 @@ import { SubTitle } from "../utils/ParamAsSubTitle";
 
 let ItemsLists = [
   {
-    Link:"/items/all/?type=",
-    Text:"All Items",
+    Link:"/items/all/default",
+    Text:"All Toolkit",
     type:"",
   },
   {
-    Link:"/items/restoratives/?type=",
-    Text:"Restoratives Items",
-    type:"restoratives",
+    Link:"/items/frameworks/default",
+    Text:"Frameworks",
+    type:"frameworks",
   },
   {
-    Link:"/items/enhancement/?type=",
-    Text:"Enhancement Items",
+    Link:"/items/enhancement/default",
+    Text:"Enhancements",
     type:"enhancement",
   },
   {
-    Link:"/items/support/?type=",
-    Text:"Support Items",
+    Link:"/items/support/default",
+    Text:"Tactical Support",
     type:"support",
   },
   {
-    Link:"/items/materials/?type=",
-    Text:"Materials",
+    Link:"/items/materials/default",
+    Text:"Data Persistence",
     type:"materials",
   },
   {
-    Link:"/items/key/?type=",
-    Text:"Key Items",
+    Link:"/items/key/default",
+    Text:"Achievement Logs",
     type:"key",
   },
   {
-    Link:"/items/caught fish/?type=",
-    Text:"Caught Fish",
+    Link:"/items/fish/default",
+    Text:"Daily Catch (Hobbies)",
     type:"fish",
   }
 ]
@@ -47,40 +47,38 @@ let ItemsLists = [
 export const Items = () => {
 
   const param = useParams();
-  let [searchParams] = useSearchParams();
-  let type = (searchParams.get("type"));
+  const currentType = param.type;
 
-  const Footer = () => {
-    if(type === ""){
-      return "all items";
-    }else if(!type){
-      return "items in your inventory"
-    }else if(param.type === 'materials' ){
-      return param.type
-    }else if(param.type === 'caught fish' ){
-      return param.type
+  const FooterText = () => {
+    if(!currentType || currentType === "all"){
+      return "all toolkit components";
+    }else if(currentType === 'materials' ){
+      return "data persistence units"
+    }else if(currentType === 'fish' ){
+      return "recreation data"
     }else{
-      return `${param.type} items`
+      return `${currentType} modules`
     }
   }
 
-  const TypeCheck = () => {
-    if(type === ""){
+  const SubTitleLabel = () => {
+    if(!currentType || currentType === "all"){
       return "all"
     }else
-      return param.type
+      return currentType
   }
 
   return(
     <PagesTemplate
       title={`ITEMS`}
-      subtitle={SubTitle(TypeCheck(), "Items")}
+      subtitle={SubTitle(SubTitleLabel(), "Items")}
+      footer={`View all ${FooterText()} currently in operational inventory.`}
       child={
         <PagesChildTemplate
           LeftContent={
             <>
               {ItemsLists.map((item)=>(
-                <YorhaNavLink key={item.Link} to={item.Link} filter={item.type} filterType={"type"} text={item.Text}/>
+                <YorhaNavLink key={item.Link} to={item.Link} text={item.Text}/>
               ))}
             </>
           }
@@ -90,7 +88,6 @@ export const Items = () => {
           }
         />
       }
-      footer={ `View all ${Footer()}.` }
     />
   )
 }

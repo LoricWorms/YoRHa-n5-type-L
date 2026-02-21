@@ -3,11 +3,11 @@ import { Bar} from "@kaineee/nier-automata-ui-library";
 import styles from "./ItemsModule.module.scss";
 import { Tab, YorhaNavLink } from "../../components";
 import { getItemsData } from "../../utils/mockData/ItemsMockData";
-import { Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { Outlet, useParams, useLocation } from "react-router-dom";
 
 export const ItemsModule = () => {
 
-  let [searchParams] = useSearchParams();
+  let params = useParams();
   let ItemsLists = getItemsData();
   let location = useLocation()
 
@@ -21,11 +21,10 @@ export const ItemsModule = () => {
           content={
             <div className={styles.ItemTypeList}>
               {ItemsLists
-              .filter((ItemsLists)=>{
-                let filter = searchParams.get("type");
-                if(!filter) return true;
-                let type = ItemsLists.type.toLowerCase();
-                return type.startsWith(filter);
+              .filter((item)=>{
+                let filter = params.type;
+                if(!filter || filter === "all") return true;
+                return item.type.toLowerCase() === filter.toLowerCase();
               })
               .map((item)=>(
                 <YorhaNavLink variant="transparent" key={item.id} to={`/items/${item.type}/${item.id}` + location.search} text={item.name}/>

@@ -4,20 +4,26 @@ import { ScrollElement, Strip, Widget } from "../../components";
 import { getProjectAsQuest } from "../../utils/githubApi";
 import styles from './QuestModule.module.scss';
 
+const LoreLink = ({ href, text }: { href: string; text: string }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" className={styles.loreLink}>
+    <div className={styles.linkIcon} />
+    <span>{text}</span>
+  </a>
+);
+
 export const ActiveQuestsModule = () => { 
   var params = useParams();
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProject = async () => {
       setLoading(true);
-      // Only fetch if questid is not 'default'
       if (params.questid && params.questid !== "default") {
         const fetchedProject = await getProjectAsQuest("LoricWorms", params.questid);
         setProject(fetchedProject);
       } else {
-        setProject(null); // Clear project if 'default' or no questid
+        setProject(null);
       }
       setLoading(false);
     };
@@ -26,15 +32,14 @@ export const ActiveQuestsModule = () => {
   }, [params.questid]);
 
   if (loading) {
-    return <p>Loading project details...</p>;
+    return <p>Syncing with Bunker data...</p>;
   }
 
-  // If no project selected (e.g., questid is 'default') or project not found, return null to show empty panel
   if (!project) {
     if (params.questid && params.questid !== "default") {
-      return <p>Project not found.</p>;
+      return <p>Signal lost: Project not found in archive.</p>;
     }
-    return null; // Don't display anything if no project is explicitly selected
+    return null;
   }
 
   return(
@@ -43,24 +48,29 @@ export const ActiveQuestsModule = () => {
         title={project.title}
           content={
             <div className={styles.ActiveQuestModule}>
-              <div className={styles.client}>Client: {project.client}</div>
+              <div className={styles.authority}>Authority/Source: {project.client}</div>
                 <div className={styles.content}>
                   <ScrollElement
                     content={<div className={styles.questDescription}>
                       <div className={styles.desc}>
-                        {project.description.map((item)=>(
-                          <div key={item}>{item}<br/></div>
+                        {project.description.map((item: string, index: number)=>(
+                          <div key={index}>{item}<br/></div>
                         ))}
                         <br/>
-                        {project.language && <div>Main language: {project.language}</div>}
-                        <br/>
-                        {project.html_url && <div><a href={project.html_url} target="_blank" rel="noopener noreferrer">View on GitHub</a></div>}
-                        {project.homepage && <div><a href={project.homepage} target="_blank" rel="noopener noreferrer">View Live Demo</a></div>}
+                        {project.language && <div>Primary Logic: {project.language}</div>}
                       </div>
+                      
+                      {(project.html_url || project.homepage) && (
+                        <div className={styles.linkContainer}>
+                          {project.html_url && <LoreLink href={project.html_url} text="ACCESS REPOSITORY" />}
+                          {project.homepage && <LoreLink href={project.homepage} text="EXECUTE LIVE DEMO" />}
+                        </div>
+                      )}
+
                       <br/>
                       <Strip/>
                       <div className={styles.footerDesc}>
-                        <p> {project.footdescription}</p>
+                        <p>{project.footdescription}</p>
                       </div>
                     </div>}
                   />

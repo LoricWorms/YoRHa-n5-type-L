@@ -31,18 +31,75 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* Prevent parent from scrolling */
+  
   .ActiveQuestModule{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 1rem 1rem 0rem 1rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+    overflow: hidden; /* Contain children */
+    
+    .authority {
+      flex-shrink: 0; /* Don't squash the header */
+      font-size: 0.9rem;
+      color: #57544a;
+      border-bottom: 1px solid #57544a55;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
     .content{
       width: 100%;
-      height: 100%;
+      flex: 1; /* Take remaining space */
+      min-height: 0; /* Crucial for nested flex scrolling */
+      display: flex;
+      flex-direction: column;
+
       .questDescription{
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 1rem;
+        
         .desc{
           opacity: 0.7;
+          line-height: 1.6;
+        }
+        .linkContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 20px;
+          .loreLink {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #57544a;
+            text-decoration: none;
+            padding: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            background-image: linear-gradient(90deg, #b4af9a 50%, #b4af9a 50%, #57544a 50%, #57544a 100%);
+            background-size: 200%;
+            background-position: 0%;
+            
+            &:hover {
+              background-position: -100%;
+              color: #b4af9a;
+            }
+
+            .linkIcon {
+              width: 12px;
+              height: 12px;
+              background-color: #57544a;
+              transition: background-color 0.2s;
+            }
+            &:hover .linkIcon {
+              background-color: #b4af9a;
+            }
+          }
         }
       }
     }

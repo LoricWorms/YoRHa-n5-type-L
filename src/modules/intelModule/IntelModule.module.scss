@@ -31,22 +31,23 @@
 }
 
 .ActiveIntelContent{
-  display: inline-flex;
-  justify-content: space-between;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  .imageParent{
-    background-color: #57544a;
-    width: 40%;
-    display: flex;
-    word-wrap: break-word;
-    .image{
-      width: 100%;
-      display: flex;
-    }
-  }
+  overflow: hidden;
+
   .content{
-    width: 60%;
+    width: 100%;
+    padding: 1rem;
+    .loreNote {
+      font-size: 0.9em;
+      color: #57544a;
+      opacity: 0.8;
+      border-left: 2px solid #57544a;
+      padding-left: 10px;
+      margin-top: 10px;
+      flex-shrink: 0;
+    }
   }
 }

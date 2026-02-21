@@ -47,23 +47,27 @@ const Dot = styled.div`
 
 const Content = styled.div`
   overflow-y: auto;
-  overflow-y: visible;
-  height: 100%;
-  padding: 0.5rem 1rem 0.5rem 0rem;
-  &::-webkit-scrollbar{
-    width: 0.3rem;
+  flex: 1;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  
+  /* NieR Style Scrollbar */
+  &::-webkit-scrollbar {
+    width: 4px;
   }
   &::-webkit-scrollbar-track {
-    border-top: 8px solid #000000;
-    border-right: 6px solid #000000;
-    border-bottom: 8px solid #000000;
-    border-left: 6px solid #000000;
-    background-color: #e1214d;
-}
+    background: transparent;
+    border-left: 1px solid #57544a33;
+  }
   &::-webkit-scrollbar-thumb {
-  background-color: #4e4b42;
-}
+    background-color: #57544a;
+    &:hover {
+      background-color: #8c8671;
+    }
+  }
 
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #57544a transparent;
 `
 
 export const ScrollElement = ({content}:TabProps) =>{

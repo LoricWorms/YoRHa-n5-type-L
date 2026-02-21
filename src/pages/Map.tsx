@@ -15,9 +15,9 @@ export const Map = () => {
                 <Bar/>
               </div>
               <div className={styles.Button}>
-                <Button disabled={true} text="Quick Save"/>
-                <Button disabled={true} text="Map Mode"/>
-                <Button disabled={true} text="Map Icons"/>
+                <Button disabled={true} text="Remote Link"/>
+                <Button disabled={true} text="Deployment Mode"/>
+                <Button disabled={true} text="Operational Area"/>
               </div>
             </div>
             <div className={styles.LeftPanelFooter}>
@@ -27,13 +27,13 @@ export const Map = () => {
         <div className={styles.RightPanel}>
           <div className={styles.MapPanel}>
             <h1>
-              Classified
+              [DATA CLASSIFIED BY THE COUNCIL OF HUMANITY]
             </h1>
           </div>
         </div>
       </div>
       }
-      footer="Map Footer"
+      footer="Satellite positioning: Transmission secure. Operational data synchronized."
     />
   )
 }

@@ -29,7 +29,7 @@ export const Weapons = () => {
 
   return (
     <PagesTemplate
-      title="ARSENAL"
+      title="WEAPONS"
       subtitle={SubTitle(TypeCheckWeapons(), "Tech Stack")} // Dynamic subtitle
       child={
         <PagesChildTemplate

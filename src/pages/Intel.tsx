@@ -6,47 +6,26 @@ import StatusModule from "../modules/statusModule";
 import { Outlet } from "react-router-dom";
 
 const IntelList = [
-
   {
-
-    name: "Profil Personnel",
-
+    name: "Personal Profile",
     type:"profile",
-
   },
-
   {
-
-    name:"Compétences Techniques",
-
+    name:"Technical Skills",
     type:"skills",
-
   },
-
   {
-
-    name:"Expérience Professionnelle",
-
+    name:"Professional Experience",
     type:"experience",
-
   },
-
   {
-
-    name:"Éducation & Certifications",
-
+    name:"Education & Certifications",
     type:"education",
-
   },
-
   {
-
     name:"Contact",
-
     type:"contact",
-
   }
-
 ]
 
 
@@ -63,11 +42,9 @@ export const Intel = () => {
 
         <PagesChildTemplate
 
-          LeftContent=
-
-              {IntelList.map((item)=>(<YorhaNavLink key={Math.random()} text={item.name} to={`/intel/${item.type}`} />
-
-              ))}
+                    LeftContent=
+                        {IntelList.map((item)=>(<YorhaNavLink key={item.type} text={item.name} to={`/intel/${item.type}`} />
+                        ))}
 
           Outlet={
 

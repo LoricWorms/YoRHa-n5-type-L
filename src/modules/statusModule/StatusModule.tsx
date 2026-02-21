@@ -7,50 +7,50 @@ const StatusModule = () => {
     <Widget
       dark={true}
       icon={false}
-      title={"Status"}
+      title={"System Status"}
       content={
         <div className={styles.StatusModule}>
           <div className={styles.StatusContainer}>
-            <span>A2</span>
-            <span>Lv: 45</span>
+            <span style={{ fontWeight: 'bold', letterSpacing: '2px' }}>LORIC WORMS</span>
+            <span>Lv: 03</span>
           </div>
           <Strip/>
           <div className={styles.StatusContainer}>
             <div className={styles.statusData}>
-              <span>Funds (G):</span>
-              <span>EXP:</span>
-              <span>HP:</span>
+              <span>Repositories (R):</span>
+              <span>Commits (C):</span>
+              <span>System Pulse:</span>
             </div>
             <div className={styles.statusData}>
-              <span>9,700</span>
-              <span>86,560</span>
-              <span>3,465/3,465</span>
+              <span>24</span>
+              <span>1,240</span>
+              <span style={{ color: '#8c8671' }}>OPERATIONAL</span>
             </div>
           </div>
           <Strip/>
           <div className={styles.StatusContainer}>
             <div className={styles.statusData}>
-              <span>Attack (Light): </span>
-              <span>Attack (Heavy): </span>
-              <span>Ranged Attack: </span>
-              <span>Defense: </span>
+              <span>Frontend Prowess:</span>
+              <span>Backend Logic:</span>
+              <span>API Connectivity:</span>
+              <span>System Stability:</span>
             </div>
             <div className={styles.statusData}>
-              <span>2,338 +</span>
-              <span>1,876 +</span>
-              <span>150 +</span>
+              <span>95%</span>
+              <span>88%</span>
+              <span>92%</span>
               <span></span>
             </div>
             <div className={styles.statusData}>
-              <span>234</span>
-              <span>188</span>
-              <span>21</span>
-              <span>734</span>
+              <span>+5</span>
+              <span>+3</span>
+              <span>+8</span>
+              <span>94%</span>
             </div>
           </div>
           <Strip/>
           <div className={styles.footer}>
-            NO ERROR
+            <span style={{ color: '#57544a', fontSize: '0.8rem', letterSpacing: '2px' }}>BUNKER LINK: ACTIVE</span>
           </div>
         </div>
       }

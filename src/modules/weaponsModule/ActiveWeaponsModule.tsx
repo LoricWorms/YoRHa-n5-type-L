@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {Strip, Widget} from "../../components";
-import { getTechEntryById } from "../../utils/mockData/TechStackData"; // New import
-import styles from "./WeaponsModule.module.scss"; // Assuming styles are still relevant
+import {Strip, Widget, ScrollElement} from "../../components";
+import { getTechEntryById } from "../../utils/mockData/TechStackData";
+import styles from "./WeaponsModule.module.scss";
 
 export const ActiveWeaponsModule = () => {
   const params = useParams();
-  const [techEntry, setTechEntry] = useState(null);
+  const [techEntry, setTechEntry] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const fetchTechEntry = async () => {
       setLoading(true);
+      setImgError(false); // Reset error state on new entry
       if (params.category && params.techid) {
         const fetchedEntry = getTechEntryById(params.category, parseInt(params.techid, 10));
         setTechEntry(fetchedEntry);
@@ -29,29 +31,43 @@ export const ActiveWeaponsModule = () => {
   }
 
   if (!techEntry) {
-    return <p>Technology not found.</p>;
+    return <p>Technology not found in archive.</p>;
   }
 
   return(
     <div className={styles.ActiveWeaponsContainer}>
       <Widget 
-        icon={false} // Assuming no icon for tech, or can be adapted
+        icon={false}
         title={techEntry.name}
-        lvl={`Level: ${techEntry.level}`} // Display level
+        lvl={`Combat Grade: ${techEntry.level}`}
         content={
-          <div className={styles.WeaponContainer}> {/* Reusing WeaponContainer styles */}
-            {techEntry.image && ( // Display image if available
-              <div className={styles.image}>
-                <img src={techEntry.image} alt={techEntry.name} />
-              </div>
-            )}
-            <div className={styles.descriptionContainer}>
-              <span>Years of experience: {techEntry.yearsOfExperience}</span>
-              <Strip/>
-              {techEntry.description.map((line, index) => (
-                <span key={index}>{line}<br/></span> // Display description lines
-              ))}
-            </div>
+          <div className={styles.WeaponContainer}>
+            <ScrollElement
+              content={
+                <div className={styles.scrollContent}>
+                  <div className={styles.image}>
+                    {techEntry.image && !imgError ? (
+                      <img 
+                        src={techEntry.image} 
+                        alt={techEntry.name} 
+                        onError={() => setImgError(true)}
+                      />
+                    ) : (
+                      <span style={{color: '#b4af9a', fontSize: '0.8rem', letterSpacing: '2px'}}>NO VISUAL DATA AVAILABLE</span>
+                    )}
+                  </div>
+                  <div className={styles.descriptionContainer}>
+                    <span className={styles.years}>Operational History: {techEntry.yearsOfExperience}</span>
+                    <Strip/>
+                    <div className={styles.descriptionText}>
+                      {techEntry.description.map((line: string, index: number) => (
+                        <p key={index}>{line}</p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              }
+            />
           </div>
         }
       />
