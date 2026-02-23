@@ -1,32 +1,40 @@
 .ItemsModule{
+  position: absolute; /* Superposition au menu de gauche */
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
+  width: 100%; /* S'étend pour couvrir l'espace disponible */
   height: 100%;
-  gap: 4%;
-  z-index: 1;
+  gap: 2rem;
+  z-index: 10;
+
   .ItemsModuleContainer{
-    width: 100%;
+    width: 450px; /* Augmenté pour être sûr de tout couvrir */
+    margin-left: -20px; /* Décalage plus important pour masquer le bord gauche */
     height: 100%;
     display: flex;
     flex-direction: row;
-    z-index: 2;
-    gap: 2em;
+    flex-shrink: 0;
+    z-index: 11;
+    gap: 1.5em;
+    background-color: #d1cdb7;
+    
     .ItemTypeList{
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 10px;
+      overflow-y: auto;
+      width: 100%;
     }
   }
   .Outlet{
-    width: 100%;
+    width: 450px; /* Largeur fixe pour laisser la place au statut à droite */
     height: 100%;
-    z-index: 2;
-  }
-  .RightEndWidget{
-    width: 100%;
-    height: 100%;
+    z-index: 10;
+    overflow-y: auto;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(0,0,0,0.1); /* Légère délimitation visuelle */
   }
 }
 

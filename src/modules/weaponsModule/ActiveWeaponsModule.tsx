@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {Strip, Widget, ScrollElement} from "../../components";
+import {Strip, Widget, ScrollElement, Bar} from "../../components";
 import { getTechEntryById } from "../../utils/mockData/TechStackData";
 import styles from "./WeaponsModule.module.scss";
 
@@ -37,40 +37,40 @@ export const ActiveWeaponsModule = () => {
   return(
     <div className={styles.ActiveWeaponsContainer}>
       <Widget 
-        icon={false}
-        title={techEntry.name}
-        lvl={`Combat Grade: ${techEntry.level}`}
-        content={
-          <div className={styles.WeaponContainer}>
-            <ScrollElement
-              content={
-                <div className={styles.scrollContent}>
-                  <div className={styles.image}>
-                    {techEntry.image && !imgError ? (
-                      <img 
-                        src={techEntry.image} 
-                        alt={techEntry.name} 
-                        onError={() => setImgError(true)}
-                      />
-                    ) : (
-                      <span style={{color: '#b4af9a', fontSize: '0.8rem', letterSpacing: '2px'}}>NO VISUAL DATA AVAILABLE</span>
-                    )}
-                  </div>
-                  <div className={styles.descriptionContainer}>
-                    <span className={styles.years}>Operational History: {techEntry.yearsOfExperience}</span>
-                    <Strip/>
-                    <div className={styles.descriptionText}>
-                      {techEntry.description.map((line: string, index: number) => (
-                        <p key={index}>{line}</p>
-                      ))}
+          icon={false}
+          title={techEntry.name}
+          lvl={`Combat Grade: ${techEntry.level}`}
+          content={
+            <div className={styles.WeaponContainer}>
+              <ScrollElement
+                content={
+                  <div className={styles.scrollContent}>
+                    <div className={styles.image}>
+                      {techEntry.image && !imgError ? (
+                        <img 
+                          src={techEntry.image} 
+                          alt={techEntry.name} 
+                          onError={() => setImgError(true)}
+                        />
+                      ) : (
+                        <span style={{color: '#b4af9a', fontSize: '0.8rem', letterSpacing: '2px'}}>NO VISUAL DATA AVAILABLE</span>
+                      )}
+                    </div>
+                    <div className={styles.descriptionContainer}>
+                      <span className={styles.years}>Operational History: {techEntry.yearsOfExperience}</span>
+                      <Strip/>
+                      <div className={styles.descriptionText}>
+                        {techEntry.description.map((line: string, index: number) => (
+                          <p key={index}>{line}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              }
-            />
-          </div>
-        }
-      />
+                }
+              />
+            </div>
+          }
+        />
     </div>
   )
 }

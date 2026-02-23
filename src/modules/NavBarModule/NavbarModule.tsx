@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar} from "@kaineee/nier-automata-ui-library";
+import { Bar, Strip } from "../../components";
 import styles from './Navbar.module.scss';
 import {RoutesConfig } from "../../routes/Routes";
 import { YorhaNavLink } from "../../components/YorhaNavLink";
@@ -20,8 +20,7 @@ export const NavbarModule = () =>{
           )
         })}
       </div>
-      <hr/>
-      <div className={styles.dottedspaced}/> 
+      <Strip />
       <div className={styles.outletContainer}>
         <Outlet/>
       </div>

@@ -4,24 +4,25 @@ import { Outlet, useParams } from "react-router-dom";
 import PagesChildTemplate from "../templates/pagesChildTemplate";
 import PagesTemplate from "../templates/pagesTemplate";
 import { getTechStackCategories } from "../utils/mockData/TechStackData";
-import { SubTitle } from "../utils/ParamAsSubTitle"; // Import SubTitle
+import { SubTitle } from "../utils/ParamAsSubTitle";
+import StatusModule from "../modules/statusModule";
 
 export const Weapons = () => {
   const param = useParams();
+  const currentCategory = param.category;
 
   // Fetch tech stack categories
   const techCategories = getTechStackCategories();
 
   // Function to determine the subtitle type
   const TypeCheckWeapons = () => {
-    // If a category param exists, return it, otherwise return undefined
-    return param.category;
+    return currentCategory;
   };
 
   // Function to determine the footer text
   const ParamCheckWeapons = () => {
-    if (param.category) {
-      return `current technologies related to ${param.category}`;
+    if (currentCategory) {
+      return `current technologies related to ${currentCategory}`;
     } else {
       return "your complete arsenal of technical skills";
     }
@@ -30,11 +31,11 @@ export const Weapons = () => {
   return (
     <PagesTemplate
       title="WEAPONS"
-      subtitle={SubTitle(TypeCheckWeapons(), "Tech Stack")} // Dynamic subtitle
+      subtitle={SubTitle(TypeCheckWeapons(), "Tech Stack")}
       child={
         <PagesChildTemplate
-          lessRightSpace={true}
-          extraMidSpace={true}
+          lessRightSpace={currentCategory ? true : false}
+          extraMidSpace={currentCategory ? true : false}
           LeftContent={
             <>
               {techCategories.map((category) => (
@@ -51,11 +52,11 @@ export const Weapons = () => {
             <Outlet />
           }
           RightContent={
-            <></>
+            !currentCategory && <StatusModule/>
           }
         />
       }
-      footer={`View ${ParamCheckWeapons()}.`} // Dynamic footer
+      footer={`View ${ParamCheckWeapons()}.`}
     />
   );
 };

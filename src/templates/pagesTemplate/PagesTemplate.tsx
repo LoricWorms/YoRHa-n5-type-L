@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './PagesTemplate.module.scss';
-import { Footer, Title } from "../../components";
+import { Footer, Title, Strip } from "../../components";
 import { motion } from "framer-motion";
 
 type PagesTemplateProps = {
@@ -20,8 +20,9 @@ const PagesTemplate = ({title, footer, child, subtitle, className}:  PagesTempla
             {child}
             </div>
         </div>
-        <div>
+        <div className={styles.FooterContainer}>
             <Footer text={footer} />
+            <Strip />
         </div>
     </motion.div>
   )

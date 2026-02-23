@@ -2,19 +2,19 @@
   "colors":[
     {
       "name":"light-yellow",
-      "hex":"#dad4bb"
+      "hex":"#d7d1b9"
     },
     {
       "name":"light-brown",
-      "hex":"#b4af9a"
+      "hex":"#aea993"
     },
     {
       "name":"dark-brown",
-      "hex":"#57544a"
+      "hex":"#5f5a4a"
     },
     {
       "name":"dark-brown-strip",
-      "hex":"#4e4b42"
+      "hex":"#4d4940"
     },
     {
       "name":"red-alert",

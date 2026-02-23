@@ -36,8 +36,6 @@ export const ItemsModule = () => {
       <div className={styles.Outlet}>
         <Outlet/>
       </div>
-      <div className={styles.RightEndWidget}>
-      </div>
     </div>
   )
 }

@@ -25,3 +25,20 @@ code {
 * {
   box-sizing: border-box;
 }
+
+/* Scrollbar Style NieR:Automata */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(174, 169, 147, 0.2); /* light-brown transparent */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5f5a4a; /* dark-brown */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4d4940;
+}
