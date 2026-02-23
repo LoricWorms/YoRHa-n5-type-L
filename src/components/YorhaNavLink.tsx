@@ -22,17 +22,22 @@ const Icon = styled.div`
   transition: .1s linear;
 `;
 
-export const YorhaCustomLink = ({className,text, filter, filterType, to, disabled=false, ...props}:YorhaNavLinkProps)=>{
+export const YorhaCustomLink = ({ className, text, filter, filterType, to, disabled = false, ...props }: YorhaNavLinkProps) => {
   let [params] = useSearchParams();
-  let isActive = params.get(filterType) === filter;
+  let searchIsActive = filterType && filter ? params.get(filterType) === filter : false;
 
-  return(
+  return (
     <div className={className}>
-      <Button disabled={disabled} {...props}>
-        <NavLink className={['mainClass', isActive ? "active" : "inactive"].join(' ')} 
-          to={filter && filterType ? `${to}?${filterType}=${filter}` : `${to}`}>
+      <Button disabled={disabled} type="button">
+        <NavLink 
+          className={({ isActive }) => 
+            ['mainClass', (isActive || searchIsActive) ? "active" : "inactive"].join(' ')
+          } 
+          to={filter && filterType ? `${to}?${filterType}=${filter}` : `${to}`}
+          {...props}
+        >
           <div className='wrapper'>
-          <Icon/> {text}
+            <Icon /> {text}
           </div>
         </NavLink>
       </Button>
@@ -47,7 +52,6 @@ const Button = styled.button`
   background-color: transparent;
   display: flex;
   flex-direction: column;
-  gap: 5px;
   border: none;
   &:disabled{
     opacity: 0.6;
@@ -115,8 +119,8 @@ const CustomNavLink = styled(YorhaCustomLink)`
   }
   .active{
     background-position: -100%;
-    width: ${props => props.theme.width};
-    padding-bottom: ${props => props.theme.padding};
+    width: ${props => props.theme.width || '100%'};
+    padding-bottom: ${props => props.theme.padding || '0rem'};
     color: #b4af9a;
     &:hover{
       &::before{
@@ -167,6 +171,8 @@ const theme = {
 
 const transparent = {
   backgroundImage: `linear-gradient(90deg, #b4af9a00 50%, #b4af9a00 50%, #57544a 50%, #57544a 100%)`,
+  width: `100%`,
+  padding: `0rem`
 };
 
 const neutral ={

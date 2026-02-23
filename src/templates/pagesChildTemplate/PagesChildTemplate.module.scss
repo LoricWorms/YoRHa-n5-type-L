@@ -41,7 +41,6 @@
       overflow-x: hidden;
       z-index: 10;
       pointer-events: none;
-      background-color: #d1cdb7; /* Rend la superposition opaque */
       
       & > * {
         pointer-events: auto;
