@@ -14,24 +14,17 @@ export const ItemsModule = () => {
   return(
     <div className={styles.ItemsModule}>
       <div className={styles.ItemsModuleContainer}>
-        <div>
-          <Bar/>
+        <div className={styles.ItemTypeList}>
+          {ItemsLists
+          .filter((item)=>{
+            let filter = params.type;
+            if(!filter || filter === "all") return true;
+            return item.type.toLowerCase() === filter.toLowerCase();
+          })
+          .map((item)=>(
+            <YorhaNavLink variant="transparent" key={item.id} to={`/items/${item.type}/${item.id}` + location.search} text={item.name}/>
+          ))}
         </div>
-        <Tab
-          content={
-            <div className={styles.ItemTypeList}>
-              {ItemsLists
-              .filter((item)=>{
-                let filter = params.type;
-                if(!filter || filter === "all") return true;
-                return item.type.toLowerCase() === filter.toLowerCase();
-              })
-              .map((item)=>(
-                <YorhaNavLink variant="transparent" key={item.id} to={`/items/${item.type}/${item.id}` + location.search} text={item.name}/>
-              ))}
-            </div>
-          }
-        />
       </div>
       <div className={styles.Outlet}>
         <Outlet/>

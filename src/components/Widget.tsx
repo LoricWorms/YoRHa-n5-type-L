@@ -64,17 +64,15 @@ const Header = styled.div`
   gap: 10px;
   background-color: ${props => props.theme.main};
   color: ${props => props.theme.color};
-  padding: 1rem;
-  height: max-content;
+  padding: 0.5rem 1rem;
   width: 100%;
-  font-size: 1.2rem;
-  height: 7%;
+  font-size: 1.1rem;
 `;
 
 const Content = styled.div`
   width: 100%;
-  height: 90%;
-  font-size: 1.2rem;
+  flex: 1;
+  font-size: 1rem;
   color: #3F3D36;
 `;
 

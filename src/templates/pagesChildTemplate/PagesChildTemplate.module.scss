@@ -15,9 +15,9 @@
       display: flex;
       flex-direction: row;
       gap: 2em;
-      height: 100%;
+      height: fit-content; /* S'adapte à la liste */
       .Bar{
-        height: 100%;
+        /* On laisse la barre s'étirer naturellement via flex-stretch du parent fit-content */
       }
       .LeftContent{
         width: 100%;

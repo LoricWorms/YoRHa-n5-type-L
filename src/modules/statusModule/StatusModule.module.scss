@@ -1,34 +1,65 @@
 .StatusModule{
-  padding: 1rem;
+  padding: 0.8rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  height: 100%;
-  .StatusContainer{
+  gap: 0.4rem; /* Gap réduit */
+  color: #3F3D36;
+  font-size: 0.9rem;
+  overflow-y: auto; /* Sécurité pour le contenu long */
+  height: auto; /* S'adapte au contenu */
+
+  .StatusContainer {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 4px;
+    align-items: flex-start;
+    padding: 2px 0;
+    font-weight: 500;
+
+    /* Pour le nom et le niveau */
+    & > span:first-child {
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
   }
-  .statusData{
+
+  .statusData {
     display: flex;
     flex-direction: column;
+    gap: 4px;
+
+    &:nth-child(1) {
+      flex: 1;
+      opacity: 0.8;
+    }
+
+    &:nth-child(2) {
+      text-align: right;
+      min-width: 60px;
+    }
+
+    &:nth-child(3) {
+      text-align: right;
+      min-width: 40px;
+      color: #8c8671;
+    }
+  }
+
+  .Divider {
     width: 100%;
-    &:nth-child(2){
-      text-align: end;
-    }
-    &:nth-child(3){
-      text-align: end;
-      width: 30%;
-    }
+    height: 1px;
+    background-color: rgba(63, 61, 54, 0.3); /* dark-text transparent */
+    margin: 0.2rem 0;
   }
-  .footer{
+
+  .footer {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100%;
-    letter-spacing: 1px;
+    padding-top: 5px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    font-weight: 600;
   }
 }

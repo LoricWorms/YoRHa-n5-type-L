@@ -7,50 +7,60 @@ const StatusModule = () => {
     <Widget
       dark={true}
       icon={false}
-      title={"System Status"}
+      title={"UNIT_STATUS"}
       content={
         <div className={styles.StatusModule}>
+          {/* Header: Identity */}
           <div className={styles.StatusContainer}>
-            <span style={{ fontWeight: 'bold', letterSpacing: '2px' }}>LORIC WORMS</span>
+            <span>LORIC WORMS [DEV]</span>
             <span>Lv: 03</span>
           </div>
-          <Strip/>
+
+          <div className={styles.Divider} />
+
+          {/* Section 1: Resources & Experience */}
           <div className={styles.StatusContainer}>
             <div className={styles.statusData}>
-              <span>Repositories (R):</span>
-              <span>Commits (C):</span>
-              <span>System Pulse:</span>
+              <span>Data Units (R):</span>
+              <span>Neural Net (EXP):</span>
+              <span>Uptime (HP):</span>
             </div>
             <div className={styles.statusData}>
               <span>24</span>
-              <span>1,240</span>
-              <span style={{ color: '#8c8671' }}>OPERATIONAL</span>
+              <span>12,450</span>
+              <span>100% / 100%</span>
             </div>
           </div>
-          <Strip/>
+
+          <div className={styles.Divider} />
+
+          {/* Section 2: Proficiencies (Combat Stats) */}
           <div className={styles.StatusContainer}>
             <div className={styles.statusData}>
-              <span>Frontend Prowess:</span>
-              <span>Backend Logic:</span>
-              <span>API Connectivity:</span>
-              <span>System Stability:</span>
+              <span>Front-end Logic: </span>
+              <span>Back-end Core: </span>
+              <span>API Pulse: </span>
+              <span>System Stability: </span>
             </div>
             <div className={styles.statusData}>
-              <span>95%</span>
-              <span>88%</span>
-              <span>92%</span>
+              <span>2,338 +</span>
+              <span>1,876 +</span>
+              <span>150 +</span>
               <span></span>
             </div>
             <div className={styles.statusData}>
-              <span>+5</span>
-              <span>+3</span>
-              <span>+8</span>
-              <span>94%</span>
+              <span>234</span>
+              <span>188</span>
+              <span>21</span>
+              <span>940</span>
             </div>
           </div>
-          <Strip/>
+
+          <div className={styles.Divider} />
+
+          {/* Footer: System Message */}
           <div className={styles.footer}>
-            <span style={{ color: '#57544a', fontSize: '0.8rem', letterSpacing: '2px' }}>BUNKER LINK: ACTIVE</span>
+            BUNKER_LINK: OPERATIONAL
           </div>
         </div>
       }

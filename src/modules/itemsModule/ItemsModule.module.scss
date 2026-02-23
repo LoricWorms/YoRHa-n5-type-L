@@ -1,25 +1,23 @@
 .ItemsModule{
   position: absolute;
   top: 0;
-  left: -2.5rem;
+  left: 2rem; /* Décale le sous-menu pour laisser apparaître la Bar originale (qui fait ~14px + gap) */
   display: flex;
   flex-direction: row;
-  width: calc(100% + 2.5rem); /* Largeur relative au conteneur parent */
+  width: calc(100% - 2rem);
   height: 100%;
   z-index: 10;
   pointer-events: none;
 
   .ItemsModuleContainer{
     pointer-events: auto;
-    width: 480px; /* Largeur pour couvrir menu + barre + marge */
+    width: 390px; /* Augmenté pour garantir une occultation totale */
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-shrink: 0;
     z-index: 11;
-    gap: 1.5em;
-    background-color: #d1cdb7; /* Couleur de fond opaque */
-    padding-left: 0.5rem;
+    background-color: #d1cdb7;
     
     .ItemTypeList{
       display: flex;
@@ -27,18 +25,19 @@
       gap: 10px;
       overflow-y: auto;
       width: 100%;
-      padding-top: 5px;
+      height: 100%;
     }
   }
   
   .Outlet{
     pointer-events: auto;
-    width: 450px; /* Largeur fixe pour le détail */
+    width: 450px; 
     height: 100%;
     z-index: 10;
     overflow-y: auto;
     flex-shrink: 0;
     background-color: transparent;
+    margin-left: 2rem; /* Espace entre la liste et le détail */
   }
 }
 
@@ -52,7 +51,7 @@
   .scrollContent {
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1rem;
     gap: 1.5rem;
   }
 
