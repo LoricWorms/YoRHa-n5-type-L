@@ -28,15 +28,17 @@ code {
 
 /* Scrollbar Style NieR:Automata */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px; /* Légèrement plus large pour la visibilité */
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(174, 169, 147, 0.2); /* light-brown transparent */
+  background: transparent;
+  border-left: 1px solid rgba(95, 90, 74, 0.1); /* Ligne guide très discrète */
 }
 
 ::-webkit-scrollbar-thumb {
   background: #5f5a4a; /* dark-brown */
+  border-radius: 0; /* Pas d'arrondis */
 }
 
 ::-webkit-scrollbar-thumb:hover {

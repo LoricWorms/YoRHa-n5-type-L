@@ -5,6 +5,7 @@ import PagesTemplate from "../templates/pagesTemplate";
 import { SubTitle } from "../utils/ParamAsSubTitle";
 import PagesChildTemplate from "../templates/pagesChildTemplate";
 import StatusModule from "../modules/statusModule";
+import { QuestsModule } from "../modules/questsModule";
 
 let QuestList = [
   {
@@ -49,6 +50,8 @@ export const Quest = () => {
       return param.statusType
   }
 
+  const statusType = param.statusType;
+
   return(
     <PagesTemplate
       title={`QUESTS`}
@@ -57,11 +60,11 @@ export const Quest = () => {
       child={
         <PagesChildTemplate
           LeftContent={
-            <>
+            <div style={{ height: '100%', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {QuestList.map((item)=>(
                 <YorhaNavLink key={item.Link} to={item.Link} filter={item.type} filterType={"status"} text={item.Text}/>
               ))}
-            </>
+            </div>
           }
           Outlet={<Outlet/>}
           RightContent={

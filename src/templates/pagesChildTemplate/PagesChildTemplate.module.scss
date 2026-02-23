@@ -6,18 +6,22 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 4%;
+  overflow: hidden;
+
   .PagesChildTemplate{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+
     .ChildContainer{
       display: flex;
       flex-direction: row;
       gap: 2em;
-      height: fit-content; /* S'adapte à la liste */
+      height: 100%;
       .Bar{
-        /* On laisse la barre s'étirer naturellement via flex-stretch du parent fit-content */
+        height: 100%;
       }
       .LeftContent{
         width: 100%;
@@ -25,21 +29,36 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        overflow-y: auto; /* SCROLL VERTICAL MENU GAUCHE */
+        overflow-x: hidden;
       }
     }
     .OutletChild{
       position: absolute;
       width: 100%;
       height: 100%;
+      overflow-y: auto; /* SCROLL VERTICAL SOUS-MENU */
+      overflow-x: hidden;
+      z-index: 10;
+      pointer-events: none;
+      background-color: #d1cdb7; /* Rend la superposition opaque */
+      
+      & > * {
+        pointer-events: auto;
+      }
     }
   }
   .MiddleContent{
     width: 100%;
     height: 100%;
+    overflow-y: auto; /* SCROLL VERTICAL MILIEU */
+    overflow-x: hidden;
   }
   .RightContent{ 
     width: 100%;
     height: 100%;
+    overflow-y: auto; /* SCROLL VERTICAL DROITE */
+    overflow-x: hidden;
   }
   .extraSpace{
     width: 200%;
