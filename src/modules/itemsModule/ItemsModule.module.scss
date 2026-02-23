@@ -1,24 +1,25 @@
 .ItemsModule{
-  position: absolute; /* Superposition au menu de gauche */
+  position: absolute;
   top: 0;
-  left: 0;
+  left: -2.5rem;
   display: flex;
   flex-direction: row;
-  width: 100%; /* S'étend pour couvrir l'espace disponible */
+  width: calc(100% + 2.5rem); /* Largeur relative au conteneur parent */
   height: 100%;
-  gap: 2rem;
   z-index: 10;
+  pointer-events: none;
 
   .ItemsModuleContainer{
-    width: 450px; /* Augmenté pour être sûr de tout couvrir */
-    margin-left: -20px; /* Décalage plus important pour masquer le bord gauche */
+    pointer-events: auto;
+    width: 480px; /* Largeur pour couvrir menu + barre + marge */
     height: 100%;
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
     z-index: 11;
     gap: 1.5em;
-    background-color: #d1cdb7;
+    background-color: #d1cdb7; /* Couleur de fond opaque */
+    padding-left: 0.5rem;
     
     .ItemTypeList{
       display: flex;
@@ -26,15 +27,18 @@
       gap: 10px;
       overflow-y: auto;
       width: 100%;
+      padding-top: 5px;
     }
   }
+  
   .Outlet{
-    width: 450px; /* Largeur fixe pour laisser la place au statut à droite */
+    pointer-events: auto;
+    width: 450px; /* Largeur fixe pour le détail */
     height: 100%;
     z-index: 10;
     overflow-y: auto;
     flex-shrink: 0;
-    border-right: 1px solid rgba(0,0,0,0.1); /* Légère délimitation visuelle */
+    background-color: transparent;
   }
 }
 
