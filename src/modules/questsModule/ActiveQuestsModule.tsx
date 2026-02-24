@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams} from "react-router-dom";
-import { ScrollElement, Strip, Widget, Bar } from "../../components";
+import { ScrollElement, Strip, Widget } from "../../components";
 import { getProjectAsQuest } from "../../utils/githubApi";
 import styles from './QuestModule.module.scss';
 
