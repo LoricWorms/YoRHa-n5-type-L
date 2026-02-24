@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap');
 
 body {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   margin: 0;
   font-family: 'Manrope', sans-serif;
@@ -11,9 +11,8 @@ body {
   background-color: #d1cdb7;
   background-size: 0.3rem 0.3rem;
   background-image: linear-gradient(to right, #ccc8b1 1px, rgba(204,200,177,0) 1px), linear-gradient(to bottom, #ccc8b1 1px, rgba(204,200,177,0) 1px);
-  position: absolute;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 code {
