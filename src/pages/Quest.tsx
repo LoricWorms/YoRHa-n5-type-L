@@ -5,7 +5,6 @@ import PagesTemplate from "../templates/pagesTemplate";
 import { SubTitle } from "../utils/ParamAsSubTitle";
 import PagesChildTemplate from "../templates/pagesChildTemplate";
 import StatusModule from "../modules/statusModule";
-import { QuestsModule } from "../modules/questsModule";
 
 let QuestList = [
   {
@@ -49,8 +48,6 @@ export const Quest = () => {
     }else
       return param.statusType
   }
-
-  const statusType = param.statusType;
 
   return(
     <PagesTemplate

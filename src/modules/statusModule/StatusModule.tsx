@@ -1,5 +1,5 @@
 import React from "react";
-import { Strip, Widget } from "../../components";
+import { Widget } from "../../components";
 import styles from "./StatusModule.module.scss";
 
 const StatusModule = () => {

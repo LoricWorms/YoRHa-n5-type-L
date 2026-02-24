@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {Strip, Widget, ScrollElement, Bar} from "../../components";
+import { Strip, Widget, ScrollElement } from "../../components";
 import { getTechEntryById } from "../../utils/mockData/TechStackData";
 import styles from "./WeaponsModule.module.scss";
 
