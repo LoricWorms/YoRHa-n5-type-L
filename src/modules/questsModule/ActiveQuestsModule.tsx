@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams} from "react-router-dom";
-import { ScrollElement, Strip, Widget } from "../../components";
+import { ScrollElement, SimpleBar, Widget } from "../../components";
 import { getProjectAsQuest } from "../../utils/githubApi";
 import styles from './QuestModule.module.scss';
 
@@ -68,7 +68,7 @@ export const ActiveQuestsModule = () => {
                       )}
 
                       <br/>
-                      <Strip/>
+                      <SimpleBar/>
                       <div className={styles.footerDesc}>
                         <p>{project.footdescription}</p>
                       </div>

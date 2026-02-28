@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Strip, Widget, ScrollElement } from "../../components";
+import { SimpleBar, Widget, ScrollElement } from "../../components";
 import { getItemsId } from "../../utils/mockData/ItemsMockData";
 import styles from './ItemsModule.module.scss';
 
@@ -48,7 +48,7 @@ export const ActiveItemsModule = () => {
                   </div>
                   
                   <br/>
-                  <Strip/>
+                  <SimpleBar/>
                   
                   <div className={styles.quantity}>
                     Module Efficiency: {item.quantity}%

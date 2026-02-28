@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Strip, Widget, ScrollElement } from "../../components";
+import { SimpleBar, Widget, ScrollElement } from "../../components";
 import { getTechEntryById } from "../../utils/mockData/TechStackData";
 import styles from "./WeaponsModule.module.scss";
 
@@ -58,7 +58,7 @@ export const ActiveWeaponsModule = () => {
                     </div>
                     <div className={styles.descriptionContainer}>
                       <span className={styles.years}>Operational History: {techEntry.yearsOfExperience}</span>
-                      <Strip/>
+                      <SimpleBar/>
                       <div className={styles.descriptionText}>
                         {techEntry.description.map((line: string, index: number) => (
                           <p key={index}>{line}</p>

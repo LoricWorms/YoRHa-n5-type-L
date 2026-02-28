@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ScrollElement, Tab, Widget, Strip } from "../../components";
+import { ScrollElement, Tab, Widget, SimpleBar } from "../../components";
 import { getPortfolioIntelEntry } from "../../utils/mockData/portfolioIntelData";
 import styles from './IntelModule.module.scss'
 
@@ -48,7 +48,7 @@ export const ActiveIntelModule = () => {
                     {data.descriptions && (
                       <>
                         <br/>
-                        <Strip/>
+                        <SimpleBar/>
                         <p className={styles.loreNote}><i>{data.descriptions}</i></p>
                       </>
                     )}
