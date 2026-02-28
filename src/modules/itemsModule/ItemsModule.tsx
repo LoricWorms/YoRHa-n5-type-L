@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ItemsModule.module.scss";
-import { YorhaNavLink } from "../../components";
+import { YorhaNavLink, Bar } from "../../components";
 import { getItemsData } from "../../utils/mockData/ItemsMockData";
 import { Outlet, useParams, useLocation } from "react-router-dom";
 
@@ -24,6 +24,9 @@ export const ItemsModule = () => {
             <YorhaNavLink variant="transparent" key={item.id} to={`/items/${item.type}/${item.id}` + location.search} text={item.name}/>
           ))}
         </div>
+      </div>
+      <div className={styles.Separator}>
+        <Bar />
       </div>
       <div className={styles.Outlet}>
         <Outlet/>

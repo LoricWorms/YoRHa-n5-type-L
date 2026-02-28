@@ -1,7 +1,12 @@
 import React from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import styled, { keyframes } from 'styled-components';
 import colors from './colors.json';
+
+const movement = keyframes`
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(10px, 10px); }
+  100% { transform: translate(0, 0); }
+`;
 
 const BackgroundContainer = styled.div`
   position: fixed;
@@ -10,78 +15,92 @@ const BackgroundContainer = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  pointer-events: none;
   overflow: hidden;
   background-color: transparent;
+  pointer-events: none;
 `;
 
-const Shape = styled(motion.div)`
+const Ring = styled.div<{ size: number }>`
   position: absolute;
-  border: 1px solid ${colors.colors[1].hex};
-  opacity: 0.25;
-`;
-
-const Circle = styled(Shape)`
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
+  border: 2px solid ${colors.colors[2].hex};
   border-radius: 50%;
-`;
-
-const SemiCircle = styled(Shape)`
-  border-radius: 100px 100px 0 0;
-  height: 50px !important;
-`;
-
-const QuarterCircle = styled(Shape)`
-  border-radius: 100% 0 0 0;
-`;
-
-const Line = styled(motion.div)`
-  position: absolute;
-  background-color: ${colors.colors[1].hex};
-  height: 1px;
   opacity: 0.2;
+  pointer-events: none;
 `;
 
-export const BackgroundAnimation = () => {
-  // Animation de va-et-vient subtile
-  const movement = {
-    x: [0, 30, 0],
-    y: [0, 15, 0],
-    transition: {
-      duration: 15,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
+const SvgLines = styled.svg<{ angle: number; isTopLeft: boolean; offset: number }>`
+  position: absolute;
+  width: 300vw;
+  height: 120px; /* Augmenté pour l'espacement de 40px */
+  overflow: visible;
+  pointer-events: none;
+  
+  ${props => props.isTopLeft ? `
+    top: 0;
+    left: 0;
+    transform-origin: left center;
+    transform: rotate(${props.angle}deg) translateY(-50%);
+  ` : `
+    bottom: 0;
+    right: 0;
+    transform-origin: right center;
+    transform: rotate(${props.angle}deg) translateY(50%);
+  `}
+`;
 
-  const reverseMovement = {
-    x: [0, -30, 0],
-    y: [0, -15, 0],
-    transition: {
-      duration: 18,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
+const CornerAnchor = styled.div`
+  position: absolute;
+  width: 0;
+  height: 0;
+  animation: ${movement} 40s ease-in-out infinite;
+`;
 
+const TopLeft = styled(CornerAnchor)`
+  top: 0;
+  left: 0;
+`;
+
+const BottomRight = styled(CornerAnchor)`
+  bottom: 0;
+  right: 0;
+`;
+
+const TripleLinesSVG = ({ angle, corner }: { angle: number, corner: 'top-left' | 'bottom-right' }) => {
+  const color = colors.colors[2].hex;
+  const isTopLeft = corner === 'top-left';
+  
   return (
-    <BackgroundContainer>
-      {/* Groupes Haut Gauche */}
-      <div style={{ position: 'absolute', top: '5%', left: '2%' }}>
-        <Circle animate={movement} style={{ width: 120, height: 120 }} />
-        <QuarterCircle animate={reverseMovement} style={{ width: 180, height: 180, top: -20, left: -20 }} />
-        <Line animate={movement} style={{ width: 600, top: 40, left: -100, rotate: '20deg' }} />
-        <Line animate={reverseMovement} style={{ width: 600, top: 70, left: -100, rotate: '20deg' }} />
-        <Line animate={movement} style={{ width: 600, top: 100, left: -100, rotate: '20deg' }} />
-      </div>
-
-      {/* Groupes Bas Droite */}
-      <div style={{ position: 'absolute', bottom: '5%', right: '2%' }}>
-        <SemiCircle animate={reverseMovement} style={{ width: 200, height: 100, bottom: 20, right: 20, rotate: '180deg' }} />
-        <Circle animate={movement} style={{ width: 150, height: 150, bottom: -10, right: -10 }} />
-        <Line animate={movement} style={{ width: 700, bottom: 50, right: -150, rotate: '-15deg' }} />
-        <Line animate={reverseMovement} style={{ width: 700, bottom: 85, right: -150, rotate: '-15deg' }} />
-        <Line animate={movement} style={{ width: 700, bottom: 120, right: -150, rotate: '-15deg' }} />
-      </div>
-    </BackgroundContainer>
+    <SvgLines angle={angle} isTopLeft={isTopLeft} offset={0}>
+      {/* Espacement de 40px entre les lignes (10, 50, 90) */}
+      <line x1="0" y1="10" x2="300vw" y2="10" stroke={color} strokeWidth="2" opacity="0.3" />
+      <line x1="0" y1="50" x2="300vw" y2="50" stroke={color} strokeWidth="2" opacity="0.3" />
+      <line x1="0" y1="90" x2="300vw" y2="90" stroke={color} strokeWidth="2" opacity="0.3" />
+    </SvgLines>
   );
 };
+
+export const BackgroundAnimation = () => {
+  return (
+    <BackgroundContainer>
+      {/* Système Haut-Gauche */}
+      <TopLeft>
+        <Ring size={800} style={{ top: -400, left: -400 }} />
+        <Ring size={860} style={{ top: -430, left: -430 }} />
+        
+        {/* Un seul triplé à 45° */}
+        <TripleLinesSVG angle={45} corner="top-left" />
+      </TopLeft>
+
+      {/* Système Bas-Droite */}
+      <BottomRight>
+        <Ring size={1000} style={{ bottom: -500, right: -500 }} />
+        <Ring size={1060} style={{ bottom: -530, right: -530 }} />
+        
+        {/* Un seul triplé à 45° */}
+        <TripleLinesSVG angle={45} corner="bottom-right" />
+      </BottomRight>
+    </BackgroundContainer>
+  );
+}

@@ -170,7 +170,7 @@ const theme = {
 };
 
 const transparent = {
-  backgroundImage: `linear-gradient(90deg, #b4af9a00 50%, #b4af9a00 50%, #57544a 50%, #57544a 100%)`,
+  backgroundImage: `linear-gradient(90deg, transparent 50%, transparent 50%, #57544a 50%, #57544a 100%)`,
   width: `100%`,
   padding: `0rem`
 };

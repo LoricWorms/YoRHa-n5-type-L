@@ -1,43 +1,51 @@
 .ItemsModule{
   position: absolute;
   top: 0;
-  left: 2rem; /* Décale le sous-menu pour laisser apparaître la Bar originale (qui fait ~14px + gap) */
+  left: 0rem; 
   display: flex;
   flex-direction: row;
-  width: calc(100% - 2rem);
+  width: 100%;
   height: 100%;
   z-index: 10;
   pointer-events: none;
+  background-color: #d1cdb7; /* Fond plein pour masquer le menu parent */
 
   .ItemsModuleContainer{
     pointer-events: auto;
-    width: 390px; /* Augmenté pour garantir une occultation totale */
+    width: 320px;
     height: 100%;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
     z-index: 11;
-    background-color: #d1cdb7;
     
     .ItemTypeList{
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 4px; /* Plus serré comme dans le jeu */
       overflow-y: auto;
       width: 100%;
       height: 100%;
+      padding: 1rem 0;
     }
+  }
+
+  .Separator {
+    pointer-events: auto;
+    height: 100%;
+    margin: 0 1rem;
+    flex-shrink: 0;
   }
   
   .Outlet{
     pointer-events: auto;
-    width: 450px; 
+    flex: 1;
+    max-width: 450px;
     height: 100%;
     z-index: 10;
     overflow-y: auto;
     flex-shrink: 0;
     background-color: transparent;
-    margin-left: 2rem; /* Espace entre la liste et le détail */
   }
 }
 
