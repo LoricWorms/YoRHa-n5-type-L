@@ -3,7 +3,7 @@
 A high-fidelity personal portfolio inspired by the **NieR:Automata** user interface. This project transforms the iconic "YoRha" aesthetic into a functional, interactive web experience to showcase skills, experience, and academic history.
 
 ## 🔗 Live Demo
-*(Insert your deployment link here, e.g., Netlify or Vercel)*
+*https://yorha-n5-type-l.netlify.app/*
 
 ## 🎮 Concept
 This portfolio is an adaptation of the NieR:Automata in-game menu system, specifically designed for **Loric Worms (YORHA UNIT [DEVELO-TYPE])**. It utilizes the "Intel" archive to present professional and personal data in an immersive environment.
