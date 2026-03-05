@@ -21,7 +21,7 @@ export const QuestsModule = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       setLoading(true);
-      const fetchedProjects = await getProjectsAsQuests("LoricWorms");
+      const fetchedProjects = await getProjectsAsQuests("CrOliX-AltF4");
       setProjects(fetchedProjects);
       setLoading(false);
     };
