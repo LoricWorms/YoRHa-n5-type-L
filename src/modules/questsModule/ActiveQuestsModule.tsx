@@ -20,7 +20,7 @@ export const ActiveQuestsModule = () => {
     const fetchProject = async () => {
       setLoading(true);
       if (params.questid && params.questid !== "default") {
-        const fetchedProject = await getProjectAsQuest("LoricWorms", params.questid);
+        const fetchedProject = await getProjectAsQuest("CrOliX-AltF4", params.questid);
         setProject(fetchedProject);
       } else {
         setProject(null);
