@@ -78,7 +78,7 @@ export async function getProjectsAsQuests(username: string) {
     const repo = repos.find((r: any) => r.name === projectName);
     if (!repo) return null;
 
-    const completedProjects = new Set(['pokemon-generator', 'pokeproject', 'wagerverse']);
+    const completedProjects = new Set(['pokemon-generator', 'pokeproject', 'wagerverse', 'tp_automatisation_tests', 'escape-rooms', 'jpa-jpql']);
     
     let client = repoClientMap[repo.name];
     if (!client) {
