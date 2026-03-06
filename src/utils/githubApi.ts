@@ -45,7 +45,7 @@ const loreFooters = [
 // Function to simulate getArchive structure
 export async function getProjectsAsQuests(username: string) {
     const repos = await fetchGithubRepos(username);
-    const completedProjects = new Set(['pokemon-generator', 'pokeproject', 'wagerverse']);
+    const completedProjects = new Set(['pokemon-generator', 'pokeproject', 'wagerverse', 'tp_automatisation_tests', 'escape-rooms', 'jpa-jpql']);
 
     return repos.map((repo: any) => {
       let client = repoClientMap[repo.name];
