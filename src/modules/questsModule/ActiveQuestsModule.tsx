@@ -12,7 +12,7 @@ const LoreLink = ({ href, text }: { href: string; text: string }) => (
 );
 
 export const ActiveQuestsModule = () => { 
-  var params = useParams();
+  const params = useParams();
   const [project, setProject] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -67,7 +67,6 @@ export const ActiveQuestsModule = () => {
                         </div>
                       )}
 
-                      <br/>
                       <SimpleBar/>
                       <div className={styles.footerDesc}>
                         <p>{project.footdescription}</p>

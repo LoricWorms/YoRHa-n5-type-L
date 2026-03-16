@@ -19,6 +19,8 @@ transition: .1s linear;
 
 const StyledSummary = styled.summary`
 width: 100%;
+list-style: none;
+&::marker, &::-webkit-details-marker { display: none; }
 background-image: linear-gradient(90deg, #b4af9a 50%, #b4af9a 50%, #57544a 50%, #57544a 100%);
 background-size: 200%;
 color:#57544a;
@@ -28,9 +30,8 @@ flex-direction: row;
 align-items: center;
 padding: 10px;
 gap: 6px;
-font-family: 'Manrope', sans-serif;
 font-weight: 500;
-font-size: 18px;
+font-size: 1rem;
 &:hover{
   background-position: -100%;
   color:#b4af9a;

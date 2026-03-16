@@ -11,6 +11,7 @@ const StyledTab = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #dad4bb;
+  border: 1px solid rgba(95, 90, 74, 0.35);
   justify-content: space-between;
 `
 

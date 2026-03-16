@@ -1,15 +1,12 @@
-export function SubTitle(ParamType, ParamTail){
-  function capitalizeFirstLetter(string) {
+export function SubTitle(ParamType: string | undefined, ParamTail: string): string {
+  function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  let subTitle = (`${ParamType} ${ParamTail}`);
-  let strip = "- ";
   if (ParamType === undefined) {
-    subTitle = "";
-    strip =""
+    return "";
   }
-  return(
-    strip + capitalizeFirstLetter(subTitle)
-  )
+
+  const subTitle = `${ParamType} ${ParamTail}`;
+  return "- " + capitalizeFirstLetter(subTitle);
 }

@@ -1,3 +1,14 @@
+let reposCache: Map<string, any[]> = new Map();
+
+async function fetchGithubReposCached(username: string): Promise<any[]> {
+  if (reposCache.has(username)) {
+    return reposCache.get(username)!;
+  }
+  const repos = await fetchGithubRepos(username);
+  reposCache.set(username, repos);
+  return repos;
+}
+
 export async function fetchGithubRepos(username: string) {
   try {
     const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
@@ -42,63 +53,44 @@ const loreFooters = [
   "ANALYSIS: Code structure efficiency exceeds 95%."
 ];
 
-// Function to simulate getArchive structure
+const completedProjects = new Set([
+  'pokemon-generator', 'pokeproject', 'wagerverse',
+  'tp_automatisation_tests', 'escape-rooms', 'jpa-jpql'
+]);
+
+function mapRepo(repo: any, footSuffix: string) {
+  let client = repoClientMap[repo.name];
+  if (!client) {
+    client = (repo.name.toLowerCase().includes('epsi') || repo.name.toLowerCase().includes('slam'))
+      ? 'Council of Humanity'
+      : 'Resistance Support';
+  }
+
+  const randomFooter = loreFooters[Math.floor(Math.random() * loreFooters.length)];
+
+  return {
+    link: repo.name,
+    title: formatTitle(repo.name),
+    client,
+    description: repo.description
+      ? [repo.description]
+      : ["System analysis: No description provided in repository metadata. Monitoring for activity..."],
+    footdescription: `${randomFooter} [${footSuffix}: ${new Date(repo.updated_at).toLocaleDateString()}]`,
+    status: completedProjects.has(repo.name.toLowerCase()) ? "Cleared" : (repo.archived ? "Archived" : "Active"),
+    html_url: repo.html_url,
+    homepage: repo.homepage,
+    language: repo.language,
+  };
+}
+
 export async function getProjectsAsQuests(username: string) {
-    const repos = await fetchGithubRepos(username);
-    const completedProjects = new Set(['pokemon-generator', 'pokeproject', 'wagerverse', 'tp_automatisation_tests', 'escape-rooms', 'jpa-jpql']);
+  const repos = await fetchGithubReposCached(username);
+  return repos.map((repo: any) => mapRepo(repo, "Access Point"));
+}
 
-    return repos.map((repo: any) => {
-      let client = repoClientMap[repo.name];
-      if (!client) {
-          client = (repo.name.toLowerCase().includes('epsi') || repo.name.toLowerCase().includes('slam')) 
-            ? 'Council of Humanity' 
-            : 'Resistance Support';
-      }
-      
-      const title = formatTitle(repo.name);
-      const randomFooter = loreFooters[Math.floor(Math.random() * loreFooters.length)];
-      
-      return {
-        link: repo.name,
-        title: title,
-        client: client,
-        description: repo.description ? [repo.description] : ["System analysis: No description provided in repository metadata. Monitoring for activity..."],
-        footdescription: `${randomFooter} [Access Point: ${new Date(repo.updated_at).toLocaleDateString()}]`,
-        status: completedProjects.has(repo.name.toLowerCase()) ? "Cleared" : (repo.archived ? "Archived" : "Active"),
-        html_url: repo.html_url,
-        homepage: repo.homepage,
-        language: repo.language,
-      };
-    });
-  }
-
-  // Function to simulate getQuest structure for a single project
-  export async function getProjectAsQuest(username: string, projectName: string) {
-    const repos = await fetchGithubRepos(username);
-    const repo = repos.find((r: any) => r.name === projectName);
-    if (!repo) return null;
-
-    const completedProjects = new Set(['pokemon-generator', 'pokeproject', 'wagerverse', 'tp_automatisation_tests', 'escape-rooms', 'jpa-jpql']);
-    
-    let client = repoClientMap[repo.name];
-    if (!client) {
-        client = (repo.name.toLowerCase().includes('epsi') || repo.name.toLowerCase().includes('slam')) 
-          ? 'Council of Humanity' 
-          : 'Resistance Support';
-    }
-
-    const title = formatTitle(repo.name);
-    const randomFooter = loreFooters[Math.floor(Math.random() * loreFooters.length)];
-
-    return {
-      link: repo.name,
-      title: title,
-      client: client,
-      description: repo.description ? [repo.description] : ["System analysis: No description provided in repository metadata. Monitoring for activity..."],
-      footdescription: `${randomFooter} [Last Transmission: ${new Date(repo.updated_at).toLocaleDateString()}]`,
-      status: completedProjects.has(repo.name.toLowerCase()) ? "Cleared" : (repo.archived ? "Archived" : "Active"),
-      html_url: repo.html_url,
-      homepage: repo.homepage,
-      language: repo.language,
-    };
-  }
+export async function getProjectAsQuest(username: string, projectName: string) {
+  const repos = await fetchGithubReposCached(username);
+  const repo = repos.find((r: any) => r.name === projectName);
+  if (!repo) return null;
+  return mapRepo(repo, "Last Transmission");
+}

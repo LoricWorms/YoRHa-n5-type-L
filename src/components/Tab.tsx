@@ -13,6 +13,7 @@ const StyledTab = styled.div`
   flex-direction: column;
   padding: 0rem 1rem 0rem 1rem;
   background-color: #dad4bb;
+  border: 1px solid rgba(95, 90, 74, 0.35);
   justify-content: space-between;
 `
 
@@ -48,7 +49,7 @@ const Dot = styled.div`
 `
 
 const Content = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100%;
   padding: 0.5rem 1rem 0.5rem 0rem;
   &::-webkit-scrollbar{

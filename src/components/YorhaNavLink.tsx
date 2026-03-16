@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import {NavLink, useSearchParams} from "react-router-dom"
+import { NavLink, useSearchParams, useLocation } from "react-router-dom"
 
 type YorhaNavLinkProps = {
   text?: string | any;
@@ -9,7 +9,7 @@ type YorhaNavLinkProps = {
   className?: string;
   disabled?: boolean;
   filterType?: string;
-  variant?:  "button" | "nav" | "transparent" | "neutral";
+  variant?: "button" | "nav" | "transparent" | "neutral";
 }
 
 const Icon = styled.div`
@@ -23,16 +23,24 @@ const Icon = styled.div`
 `;
 
 export const YorhaCustomLink = ({ className, text, filter, filterType, to, disabled = false, ...props }: YorhaNavLinkProps) => {
-  let [params] = useSearchParams();
-  let searchIsActive = filterType && filter ? params.get(filterType) === filter : false;
+  const [params] = useSearchParams();
+  const location = useLocation();
+
+  const searchIsActive = filterType && filter ? params.get(filterType) === filter : false;
+
+  // Fix active state for links ending in /default: treat as active for any sub-path
+  const basePathForActive = to?.endsWith('/default') ? to.replace('/default', '') : null;
+  const pathPrefixActive = basePathForActive
+    ? location.pathname.startsWith(basePathForActive + '/')
+    : false;
 
   return (
     <div className={className}>
       <Button disabled={disabled} type="button">
-        <NavLink 
-          className={({ isActive }) => 
-            ['mainClass', (isActive || searchIsActive) ? "active" : "inactive"].join(' ')
-          } 
+        <NavLink
+          className={({ isActive }) =>
+            ['mainClass', (isActive || searchIsActive || pathPrefixActive) ? "active" : "inactive"].join(' ')
+          }
           to={filter && filterType ? `${to}?${filterType}=${filter}` : `${to}`}
           {...props}
         >
@@ -106,7 +114,7 @@ const CustomNavLink = styled(YorhaCustomLink)`
         content: "";
         transform: translate(0px, -8px);
         pointer-events: none;
-    }
+      }
       &::after{
         height: 2px;
         z-index: -1;
@@ -146,9 +154,8 @@ const CustomNavLink = styled(YorhaCustomLink)`
     gap: 10px;
     align-items: center;
     color: inherit;
-    font-family: 'Manrope', sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 1rem;
   }
   .active > .wrapper{
     color: #b4af9a;
@@ -156,7 +163,7 @@ const CustomNavLink = styled(YorhaCustomLink)`
 `
 
 CustomNavLink.defaultProps = {
-  theme:{
+  theme: {
     backgroundImage: `linear-gradient(90deg, #b4af9a 50%, #b4af9a 50%, #57544a 50%, #57544a 100%)`,
     padding: `2rem`,
     width: `100%`
@@ -175,43 +182,35 @@ const transparent = {
   padding: `0rem`
 };
 
-const neutral ={
+const neutral = {
   backgroundImage: `linear-gradient(90deg, #b4af9a 50%, #b4af9a 50%, #57544a 50%, #57544a 100%)`,
   width: `100%`,
   padding: `0rem`
 }
 
-export const YorhaNavLink = ({to, filter="", filterType, variant="nav", text, ...props}:YorhaNavLinkProps) =>{
-
-  //TODO refactor for more variants using key value, add pointer events to be used as child, or put it on button, future problems
-  const checker = () =>{
-    if(variant === "nav"){
-      return(
-        <CustomNavLink to={to} filter={filter} text={text} filterType={filterType} variant={variant} {...props}/>
-      )      
-    } else if(variant === "button"){
-      return(
+export const YorhaNavLink = ({ to, filter = "", filterType, variant = "nav", text, ...props }: YorhaNavLinkProps) => {
+  const checker = () => {
+    if (variant === "nav") {
+      return <CustomNavLink to={to} filter={filter} text={text} filterType={filterType} variant={variant} {...props} />
+    } else if (variant === "button") {
+      return (
         <ThemeProvider theme={theme}>
-          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props}/>
+          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props} />
         </ThemeProvider>
       )
-    } else if(variant === "transparent"){
-      return(
+    } else if (variant === "transparent") {
+      return (
         <ThemeProvider theme={transparent}>
-          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props}/>
+          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props} />
         </ThemeProvider>
       )
-    } else if(variant === "neutral"){
-      return(
+    } else if (variant === "neutral") {
+      return (
         <ThemeProvider theme={neutral}>
-          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props}/>
+          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props} />
         </ThemeProvider>
       )
     }
   }
-  return(
-     <>
-     {checker()}
-     </>
-  )
+  return <>{checker()}</>
 }

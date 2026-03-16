@@ -93,6 +93,6 @@ export function getItemsData(){
   return ItemsData;
 }
 
-export function getItemsId(id){
+export function getItemsId(id: number) {
   return ItemsData.find((item) => item.id === id);
 }

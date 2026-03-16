@@ -47,7 +47,6 @@ export const ActiveIntelModule = () => {
                     ))}
                     {data.descriptions && (
                       <>
-                        <br/>
                         <SimpleBar/>
                         <p className={styles.loreNote}><i>{data.descriptions}</i></p>
                       </>

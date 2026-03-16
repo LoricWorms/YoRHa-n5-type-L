@@ -6,7 +6,7 @@ import PagesChildTemplate from "../templates/pagesChildTemplate";
 import PagesTemplate from "../templates/pagesTemplate";
 import { SubTitle } from "../utils/ParamAsSubTitle";
 
-let ItemsLists = [
+const ItemsLists = [
   {
     Link:"/items/all/default",
     Text:"All Toolkit",

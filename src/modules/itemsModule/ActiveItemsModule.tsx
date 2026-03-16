@@ -5,7 +5,7 @@ import { getItemsId } from "../../utils/mockData/ItemsMockData";
 import styles from './ItemsModule.module.scss';
 
 export const ActiveItemsModule = () => {
-  let params = useParams();
+  const params = useParams();
   const [imgError, setImgError] = useState(false);
   const item = getItemsId(parseInt(params.itemid || "0", 10));
 
@@ -47,7 +47,6 @@ export const ActiveItemsModule = () => {
                     }
                   </div>
                   
-                  <br/>
                   <SimpleBar/>
                   
                   <div className={styles.quantity}>

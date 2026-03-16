@@ -2,59 +2,37 @@ import React from "react";
 import styled, { ThemeProvider } from 'styled-components';
 import colors from './colors.json';
 
-//TODO might want to refactor the parent element style/size to fix being pushed by font size
-
 interface WidgetProps {
   dark?: boolean;
   title?: string | number;
   content?: React.ReactNode;
-  icon?: boolean;
+  icon?: boolean; // controls the colored square marker — title always visible
   lvl?: string | number;
-}
-
-// const Icon = styled.div`
-//   z-index: 10;
-//   width: 10%;
-//   height: 10%;
-//   min-width: 20px;
-//   min-height: 20px;
-//   background-color: ${props => props.theme.bg};
-//   background-size: 200%;
-//   transition: .1s linear;
-// `;
-
-const darkIcon = {
-  bg: `${colors.colors[0].hex}`
 }
 
 const WidgetParent = styled.div`
   width: 100%;
   height: 100%;
   background-color: #dad4bb;
+  border: 1px solid rgba(95, 90, 74, 0.35);
   display: flex;
   flex-direction: column;
 `
 
-const Title = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 10px;
-  flex-direction: row;
-  align-items: center;
-  /* justify-content: space-between; */
-  &::before{
-    align-items: center;
-    height: 20px;
-    width: 20px;
-    background-color: ${props => props.theme.bg};;
-    content: "";
-  }
+const TitleSquare = styled.div`
+  height: 20px;
+  width: 20px;
+  flex-shrink: 0;
+  background-color: ${props => props.theme.bg};
 `
 
-Title.defaultProps = {
-  theme: {
-    bg: `${colors.colors[2].hex}`
-  }
+TitleSquare.defaultProps = {
+  theme: { bg: `${colors.colors[2].hex}` }
+}
+
+const TitleSquareDark = styled(TitleSquare)``;
+TitleSquareDark.defaultProps = {
+  theme: { bg: `${colors.colors[0].hex}` }
 }
 
 const Header = styled.div`
@@ -74,6 +52,7 @@ const Content = styled.div`
   flex: 1;
   font-size: 1rem;
   color: #3F3D36;
+  overflow: hidden;
 `;
 
 Header.defaultProps = {
@@ -83,56 +62,32 @@ Header.defaultProps = {
   }
 }
 
-const theme = {
+const darkHeaderTheme = {
   main: `${colors.colors[2].hex}`,
-  color:`${colors.colors[0].hex}`
+  color: `${colors.colors[0].hex}`
 };
 
-export const Widget = ({dark = false , title, content, lvl, icon=true, ...props}: WidgetProps) => {
-  const iconChecker = () =>{
-    if(icon === true){
-      if(dark){
-        return(
-          <ThemeProvider theme={darkIcon}>
-            <Title>
-              <span>{title}</span> <span>{lvl}</span>
-            </Title>
-          </ThemeProvider>
-        )
-      } else {
-        return(
-          <Title>
-            <span>{title}</span> <span>{lvl}</span>
-          </Title>
-        )
-      }
-    } else {
-      return <></>;
-    }
-  }
-  const checker = () => {
-    if(dark === false){
-      return(
-        <Header>
-            {iconChecker()}
-        </Header>
-      )
-    }else{
-      return(
-        <ThemeProvider theme={theme}>
+export const Widget = ({ dark = false, title, content, lvl, icon = true, ...props }: WidgetProps) => {
+  return (
+    <WidgetParent>
+      {dark ? (
+        <ThemeProvider theme={darkHeaderTheme}>
           <Header>
-              {iconChecker()}
+            {icon && <TitleSquareDark />}
+            <span>{title}</span>
+            {lvl && <span>{lvl}</span>}
           </Header>
         </ThemeProvider>
-      )
-    }
-  }
-  return(
-    <WidgetParent>
-      {checker()}
-        <Content>
-          {content}
-        </Content>
+      ) : (
+        <Header>
+          {icon && <TitleSquare />}
+          <span>{title}</span>
+          {lvl && <span>{lvl}</span>}
+        </Header>
+      )}
+      <Content>
+        {content}
+      </Content>
     </WidgetParent>
-  )
+  );
 }
