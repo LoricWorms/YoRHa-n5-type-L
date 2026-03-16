@@ -35,10 +35,11 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      overflow-y: auto; /* SCROLL LISTE */
+      overflow-y: auto;
       overflow-x: hidden;
       height: 100%;
       width: 100%;
+      padding-left: 60px;
     }
   }
   

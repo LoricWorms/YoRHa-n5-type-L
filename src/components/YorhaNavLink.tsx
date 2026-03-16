@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { NavLink, useSearchParams, useLocation } from "react-router-dom"
+import pointeurNoir from '../pointeur-noir.png';
 
 type YorhaNavLinkProps = {
   text?: string | any;
@@ -10,25 +11,25 @@ type YorhaNavLinkProps = {
   disabled?: boolean;
   filterType?: string;
   variant?: "button" | "nav" | "transparent" | "neutral";
+  rightText?: string | number;
 }
 
 const Icon = styled.div`
-  width: 5%;
-  height: 5%;
-  min-width: 20px;
-  min-height: 20px;
-  background-image: linear-gradient(90deg, #57544a 50%, #57544a 50%, #dad4bb 50%, #dad4bb 100%);
-  background-size: 200%;
-  transition: .1s linear;
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  flex-shrink: 0;
+  background-color: #57544a;
+  transform: rotate(45deg);
+  transition: background-color .15s linear;
 `;
 
-export const YorhaCustomLink = ({ className, text, filter, filterType, to, disabled = false, ...props }: YorhaNavLinkProps) => {
+export const YorhaCustomLink = ({ className, text, filter, filterType, to, disabled = false, rightText, ...props }: YorhaNavLinkProps) => {
   const [params] = useSearchParams();
   const location = useLocation();
 
   const searchIsActive = filterType && filter ? params.get(filterType) === filter : false;
 
-  // Fix active state for links ending in /default: treat as active for any sub-path
   const basePathForActive = to?.endsWith('/default') ? to.replace('/default', '') : null;
   const pathPrefixActive = basePathForActive
     ? location.pathname.startsWith(basePathForActive + '/')
@@ -45,7 +46,8 @@ export const YorhaCustomLink = ({ className, text, filter, filterType, to, disab
           {...props}
         >
           <div className='wrapper'>
-            <Icon /> {text}
+            <div className='leftContent'><Icon /> {text}</div>
+            {rightText !== undefined && <span className='rightText'>{rightText}</span>}
           </div>
         </NavLink>
       </Button>
@@ -69,6 +71,7 @@ const Button = styled.button`
 
 const CustomNavLink = styled(YorhaCustomLink)`
   .mainClass{
+    position: relative;
     font-size: 1rem;
     height: 100%;
     width: 100%;
@@ -86,7 +89,7 @@ const CustomNavLink = styled(YorhaCustomLink)`
       color: #b4af9a;
     }
     &:hover ${Icon}{
-      background-position: -100%;
+      background-color: #b4af9a;
     }
     &::before{
       height: 0px;
@@ -130,6 +133,22 @@ const CustomNavLink = styled(YorhaCustomLink)`
     width: ${props => props.theme.width || '100%'};
     padding-bottom: ${props => props.theme.padding || '0rem'};
     color: #b4af9a;
+    > .wrapper::before {
+      display: ${props => (props.theme as any).showCursor ? 'block' : 'none'};
+      content: "";
+      position: absolute;
+      left: -54px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 50px;
+      background-image: url(${pointeurNoir});
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      filter: ${props => (props.theme as any).cursorFilter || 'none'};
+      pointer-events: none;
+    }
     &:hover{
       &::before{
         height: 0px;
@@ -142,8 +161,7 @@ const CustomNavLink = styled(YorhaCustomLink)`
     }
   }
   .active ${Icon}{
-    background-position: -100%;
-    color: #b4af9a;
+    background-color: #b4af9a;
   }
   .inactive{
   }
@@ -151,11 +169,21 @@ const CustomNavLink = styled(YorhaCustomLink)`
     padding: 10px;
     display: flex;
     flex-direction: row;
-    gap: 10px;
     align-items: center;
+    justify-content: space-between;
     color: inherit;
     font-weight: 500;
     font-size: 1rem;
+    .leftContent {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+    .rightText {
+      flex-shrink: 0;
+      opacity: 0.75;
+    }
   }
   .active > .wrapper{
     color: #b4af9a;
@@ -166,48 +194,54 @@ CustomNavLink.defaultProps = {
   theme: {
     backgroundImage: `linear-gradient(90deg, #b4af9a 50%, #b4af9a 50%, #57544a 50%, #57544a 100%)`,
     padding: `2rem`,
-    width: `100%`
+    width: `100%`,
+    showCursor: true,
+    cursorFilter: 'invert(1)',
   }
 };
 
 const theme = {
   backgroundImage: `linear-gradient(90deg, #b4af9a 50%, #b4af9a 50%, #57544a 50%, #57544a 100%)`,
   width: `110%`,
-  padding: `0rem`
+  padding: `0rem`,
+  showCursor: true,
+  cursorFilter: 'invert(1)',
 };
 
 const transparent = {
   backgroundImage: `linear-gradient(90deg, transparent 50%, transparent 50%, #57544a 50%, #57544a 100%)`,
   width: `100%`,
-  padding: `0rem`
+  padding: `0rem`,
+  showCursor: true,
 };
 
 const neutral = {
   backgroundImage: `linear-gradient(90deg, #b4af9a 50%, #b4af9a 50%, #57544a 50%, #57544a 100%)`,
   width: `100%`,
-  padding: `0rem`
+  padding: `0rem`,
+  showCursor: false,
 }
 
-export const YorhaNavLink = ({ to, filter = "", filterType, variant = "nav", text, ...props }: YorhaNavLinkProps) => {
+export const YorhaNavLink = ({ to, filter = "", filterType, variant = "nav", text, rightText, ...props }: YorhaNavLinkProps) => {
   const checker = () => {
     if (variant === "nav") {
-      return <CustomNavLink to={to} filter={filter} text={text} filterType={filterType} variant={variant} {...props} />
+      return <CustomNavLink to={to} filter={filter} text={text} filterType={filterType} variant={variant} rightText={rightText} {...props} />
     } else if (variant === "button") {
       return (
         <ThemeProvider theme={theme}>
-          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props} />
+          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} rightText={rightText} {...props} />
         </ThemeProvider>
       )
     } else if (variant === "transparent") {
       return (
         <ThemeProvider theme={transparent}>
-          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props} />
+          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} rightText={rightText} {...props} />
         </ThemeProvider>
       )
     } else if (variant === "neutral") {
       return (
         <ThemeProvider theme={neutral}>
-          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} {...props} />
+          <CustomNavLink to={to} filter={filter} filterType={filterType} variant={variant} text={text} rightText={rightText} {...props} />
         </ThemeProvider>
       )
     }

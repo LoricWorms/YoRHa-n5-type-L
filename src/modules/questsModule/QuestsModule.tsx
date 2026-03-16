@@ -10,13 +10,13 @@ import { getProjectsAsQuests } from "../../utils/githubApi";
 import styles from './QuestModule.module.scss';
 
 export const QuestsModule = () => {
-  let [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { questid, statusType } = useParams();
 
-  let location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchProjects = async () => {

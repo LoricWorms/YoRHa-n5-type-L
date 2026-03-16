@@ -22,11 +22,11 @@
     .ItemTypeList{
       display: flex;
       flex-direction: column;
-      gap: 4px; /* Plus serré comme dans le jeu */
+      gap: 4px;
       overflow-y: auto;
       width: 100%;
       height: 100%;
-      padding: 1rem 0;
+      padding: 1rem 0 1rem 60px;
     }
   }
 

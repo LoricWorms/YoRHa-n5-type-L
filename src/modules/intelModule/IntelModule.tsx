@@ -6,13 +6,12 @@ import styles from './IntelModule.module.scss'
 
 export const IntelModule = () => {
 
-  let params = useParams(); // Changed to useParams
-
-  let intellist = getPortfolioIntelData();
+  const params = useParams();
+  const intellist = getPortfolioIntelData();
 
   // Filter based on IntelType from URL parameter
   const filteredCategory = intellist.filter((category) => {
-    let filter = params.type; // Get type from useParams
+    const filter = params.type;
     if (!filter) return false; // Don't show anything if no type
     return category.IntelType === filter;
   });
