@@ -45,6 +45,19 @@ const Header = styled.div`
   padding: 0.5rem 1rem;
   width: 100%;
   font-size: 1.1rem;
+  overflow: hidden;
+  span:first-of-type {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  span:last-of-type {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
 `;
 
 const Content = styled.div`

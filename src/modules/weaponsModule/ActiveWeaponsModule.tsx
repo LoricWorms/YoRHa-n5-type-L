@@ -39,7 +39,7 @@ export const ActiveWeaponsModule = () => {
       <Widget 
           icon={false}
           title={techEntry.name}
-          lvl={`Combat Grade: ${techEntry.level}`}
+          lvl={techEntry.level}
           content={
             <div className={styles.WeaponContainer}>
               <ScrollElement

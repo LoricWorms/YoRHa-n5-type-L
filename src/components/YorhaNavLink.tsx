@@ -15,12 +15,11 @@ type YorhaNavLinkProps = {
 }
 
 const Icon = styled.div`
-  width: 10px;
-  height: 10px;
-  min-width: 10px;
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
   flex-shrink: 0;
   background-color: #57544a;
-  transform: rotate(45deg);
   transition: background-color .15s linear;
 `;
 
