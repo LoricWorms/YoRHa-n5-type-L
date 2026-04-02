@@ -2,7 +2,7 @@
 
 A high-fidelity personal portfolio inspired by the **NieR:Automata** user interface. This project transforms the iconic "YoRha" aesthetic into a functional, interactive web experience to showcase skills, experience, and academic history.
 
-## 🔗 Live Demo
+## Live Demo
 *https://yorha-n5-type-l.netlify.app/*
 
 ## Concept
