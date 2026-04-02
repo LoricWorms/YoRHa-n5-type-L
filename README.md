@@ -5,7 +5,7 @@ A high-fidelity personal portfolio inspired by the **NieR:Automata** user interf
 ## 🔗 Live Demo
 *https://yorha-n5-type-l.netlify.app/*
 
-## 🎮 Concept
+## Concept
 This portfolio is an adaptation of the NieR:Automata in-game menu system, specifically designed for **Loric Worms (YORHA UNIT [DEVELO-TYPE])**. It utilizes the "Intel" archive to present professional and personal data in an immersive environment.
 
 ### Integrated Modules:
@@ -24,7 +24,7 @@ This portfolio is an adaptation of the NieR:Automata in-game menu system, specif
 - **Effects**: React Shuffle Text for the signature glitchy terminal appearance.
 - **Build Tools**: Webpack, Rollup, and Storybook for component isolation.
 
-## 📜 Credits & Acknowledgments
+## Credits & Acknowledgments
 This project is built upon the foundational work of the **NieR Automata Design System**.
 
 - **Original Creator**: [Kndgy](https://github.com/Kndgy) - Architect of the core UI library and the NieR:Automata design system foundations.
@@ -32,7 +32,7 @@ This project is built upon the foundational work of the **NieR Automata Design S
 
 Original Repository: [NieR-Automata-Design-System](https://github.com/Kndgy/NieR-Automata-Design-System)
 
-## 🚀 Deployment & Installation
+## Deployment & Installation
 
 ### Prerequisites
 - Node.js (v16.x or higher)
