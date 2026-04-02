@@ -17,7 +17,7 @@ This portfolio is an adaptation of the NieR:Automata in-game menu system, specif
   - **Contact [COMMS TERMINAL]**: Direct transmission protocols for collaboration.
 - **UI Library**: A collection of React components replicating the game's interface (Buttons, Widgets, Bars, and Glitch effects).
 
-## 🛠️ Technical Specifications
+## Technical Specifications
 - **Framework**: React with TypeScript
 - **Styling**: Sass (SCSS) and Styled Components for dynamic UI elements.
 - **Animations**: Framer and custom CSS transitions.
